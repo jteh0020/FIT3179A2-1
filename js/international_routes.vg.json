@@ -1,169 +1,42 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Domestic Flight Routes Across Major Malaysian Airports (2017–2024)",
+  "title": {
+    "text": "International Flight Routes Across Major Malaysian Airports (2017–2024)",
+    "anchor": "middle",
+    "fontSize": 18,
+    "fontWeight": "bold",
+    "dy": -10
+  },
   "width": 900,
-  "height": 350,
-  "projection": {"type": "mercator", "scale": 2400, "center": [110, 4.5]},
+  "height": 450,
+"projection": {"type": "mercator", "scale": 180, "center": [110, 10]},
 
   "params": [
     {
-      "name": "state_selection",
-      "value": "All",
-      "bind": {
-        "input": "select",
-        "options": [
-          "All",
-          "Johor",
-          "Kedah",
-          "Kelantan",
-          "Malacca (Melaka)",
-          "Negeri Sembilan",
-          "Pahang",
-          "Penang (Pulau Pinang)",
-          "Perak",
-          "Perlis",
-          "Sabah",
-          "Sarawak",
-          "Selangor",
-          "Terengganu",
-          "Federal Territory of Kuala Lumpur",
-          "Federal Territory of Labuan",
-          "Federal Territory of Putrajaya"
-        ],
-        "name": "Select State/Territory: "
-      }
-    },
-    {
       "name": "year_select",
       "value": 2017,
-      "bind": {
-        "input": "range",
-        "min": 2017,
-        "max": 2024,
-        "step": 1,
-        "name": "Select Year: "
-      }
+      "bind": {"input": "range", "min": 2017, "max": 2024, "step": 1, "name": "Select Year: "}
     }
   ],
 
   "layer": [
     {
-      "data": {"graticule": {"step": [10, 10]}},
+      "data": {"graticule": {"step": [20, 20]}},
       "mark": {"type": "geoshape", "stroke": "#ccc", "strokeDash": [2, 2], "opacity": 0.8}
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/js/malaysia_map.json",
-        "format": {"type": "topojson", "feature": "malaysia_map"}
+        "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/js/ne_10m_admin_0_countries.json",
+        "format": {"type": "topojson", "feature": "ne_10m_admin_0_countries"}
       },
-      "mark": {"type": "geoshape", "fill": "#f0f0f0", "stroke": "#333", "strokeWidth": 1},
-      "encoding": {
-      }
+      "mark": {"type": "geoshape", "fill": "#f0f0f0", "stroke": "#333", "strokeWidth": 0.5}
     },
     {
       "data": {
-        "values": [
-          {"state": "Johor", "longitude": 103.76, "latitude": 1.46, "short": "JHR"},
-          {"state": "Kedah", "longitude": 100.37, "latitude": 6.05, "short": "KDH"},
-          {"state": "Kelantan", "longitude": 102.25, "latitude": 6.29, "short": "KLT"},
-          {"state": "Malacca (Melaka)", "longitude": 102.25, "latitude": 2.20, "short": "MLK"},
-          {"state": "Negeri Sembilan", "longitude": 101.94, "latitude": 2.72, "short": "NSN"},
-          {"state": "Pahang", "longitude": 103.33, "latitude": 3.88, "short": "PHG"},
-          {"state": "Penang (Pulau Pinang)", "longitude": 100.11, "latitude": 5.1, "short": "PNG"},
-          {"state": "Perak", "longitude": 101.08, "latitude": 4.60, "short": "PRK"},
-          {"state": "Perlis", "longitude": 100.20, "latitude": 6.5, "short": "PLS"},
-          {"state": "Sabah", "longitude": 116.07, "latitude": 5.98, "short": "SBH"},
-          {"state": "Sarawak", "longitude": 110.34, "latitude": 1.56, "short": "SWK"},
-          {"state": "Selangor", "longitude": 101.52, "latitude": 3.25, "short": "SGR"},
-          {"state": "Terengganu", "longitude": 103.14, "latitude": 5.25, "short": "TRG"},
-          {"state": "Federal Territory of Kuala Lumpur", "longitude": 101, "latitude": 3.15, "short": "KUL"},
-          {"state": "Federal Territory of Labuan", "longitude": 115.22, "latitude": 5.30, "short": "LBN"}
-        ]
-      },
-      "mark": {"type": "text", "fontSize": 10, "fontWeight": "bold", "color": "black"},
-      "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
-        "text": {"field": "short", "type": "nominal"}
-      }
-    },
-    {
-      "data": {
-        "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/malaysia_cities.csv",
+        "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
         "format": {"type": "csv"}
       },
-      "mark": {"type": "circle", "color": "red", "size": 20},
-      "encoding": {
-        "longitude": {"field": "Longitude", "type": "quantitative"},
-        "latitude": {"field": "Latitude", "type": "quantitative"},
-        "tooltip": [
-          {"field": "City", "type": "nominal", "title": "Airport"},
-          {"field": "Longitude", "type": "quantitative"},
-          {"field": "Latitude", "type": "quantitative"}
-        ]
-      }
-    },
-    {
-      "data": {
-        "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/malaysia_cities.csv",
-        "format": {"type": "csv"}
-      },
-      "mark": {"type": "text", "fontSize": 10, "color": "darkblue"},
-      "encoding": {
-        "longitude": {"field": "Longitude"},
-        "latitude": {"field": "Latitude"},
-        "text": {"field": "City", "type": "nominal"},
-        "dy": {"value": -6}
-      }
-    },
-    {
-      "data": {
-        "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/dom_sheet2.csv",
-        "format": {"type": "csv"}
-      },
-      "transform": [
-        {"filter": "isValid(datum.Year) && datum.Year == year_select"},
-        {
-          "lookup": "City1",
-          "from": {
-            "data": {
-              "values": [
-                {"City": "Alor Setar", "State": "Kedah"},
-                {"City": "Bario", "State": "Sarawak"},
-                {"City": "Bintulu", "State": "Sarawak"},
-                {"City": "Ipoh", "State": "Perak"},
-                {"City": "Johor Bahru", "State": "Johor"},
-                {"City": "Kota Baharu", "State": "Kelantan"},
-                {"City": "Kota Kinabalu", "State": "Sabah"},
-                {"City": "Kuala Lumpur", "State": "Federal Territory of Kuala Lumpur"},
-                {"City": "Kuantan", "State": "Pahang"},
-                {"City": "Kuala Terengganu", "State": "Terengganu"},
-                {"City": "Kuching", "State": "Sarawak"},
-                {"City": "Labuan", "State": "Federal Territory of Labuan"},
-                {"City": "Lahad Datu", "State": "Sabah"},
-                {"City": "Langkawi", "State": "Kedah"},
-                {"City": "Lawas", "State": "Sarawak"},
-                {"City": "Limbang", "State": "Sarawak"},
-                {"City": "Long Banga", "State": "Sarawak"},
-                {"City": "Malacca", "State": "Melaka"},
-                {"City": "Miri", "State": "Sarawak"},
-                {"City": "Mukah", "State": "Sarawak"},
-                {"City": "Mulu", "State": "Sarawak"},
-                {"City": "Penang", "State": "Pulau Pinang"},
-                {"City": "Redang", "State": "Terengganu"},
-                {"City": "Sandakan", "State": "Sabah"},
-                {"City": "Sibu", "State": "Sarawak"},
-                {"City": "Subang", "State": "Selangor"},
-                {"City": "Tawau", "State": "Sabah"},
-                {"City": "Tioman Island", "State": "Pahang"}
-              ]
-            },
-            "key": "City",
-            "fields": ["State"]
-          }
-        },
-        {"filter": "state_selection == 'All' || datum.State == state_selection"}
-      ],
+      "transform": [{"filter": "datum.Year == year_select"}],
       "mark": {"type": "rule", "stroke": "steelblue", "strokeWidth": 1.2, "opacity": 0.6},
       "encoding": {
         "longitude": {"field": "Long1", "type": "quantitative"},
@@ -171,25 +44,22 @@
         "longitude2": {"field": "Long2", "type": "quantitative"},
         "latitude2": {"field": "Lat2", "type": "quantitative"},
         "tooltip": [
-          {"field": "City1", "type": "nominal", "title": "From"},
-          {"field": "City2", "type": "nominal", "title": "To"},
-          {"field": "Year", "type": "quantitative", "title": "Year"},
-          {"field": "State", "type": "nominal", "title": "Origin State"}
-        ],
-        "color": {"field": "State", "type": "nominal", "legend": {"title": "Origin State"}}
+          {"field": "City1", "title": "From"},
+          {"field": "City2", "title": "To"},
+          {"field": "Year", "title": "Year"}
+        ]
       }
     },
     {
       "data": {
-        "values": [
-          {"longitude": 110, "latitude": -2, "text": "Domestic Flight Routes Across Major Malaysian Airports (2017–2024)"}
-        ]
+        "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
+        "format": {"type": "csv"}
       },
-      "mark": {"type": "text", "fontSize": 16, "fontWeight": "bold", "color": "#222", "align": "center"},
+      "mark": {"type": "circle", "color": "red", "size": 50, "opacity": 0.9},
       "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
-        "text": {"field": "text", "type": "nominal"}
+        "longitude": {"field": "Long1"},
+        "latitude": {"field": "Lat1"},
+        "tooltip": [{"field": "City1", "title": "Origin Airport"}]
       }
     }
   ]
