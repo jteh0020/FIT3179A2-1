@@ -15,7 +15,7 @@
   height: auto !important;
 }
 
-#bar_vis {
+#bar_vis1 {
   width: min(96vw, 700px);
   min-height: 350px;          /* ensures it has space to render */
   margin: 30px auto;          /* adds spacing from the map */
