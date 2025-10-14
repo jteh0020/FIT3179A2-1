@@ -16,16 +16,16 @@
     <h2>Domestic Air Travel In Malaysia</h1>
     <div id="dot_map"></div>
     <h2>Top 10 Busiest Domestic Routes in Malaysia</h2>
-    <div id="bar_vis1"></div>
+    <div id="bar_vis"></div>
     <h2>International Air Travel In Malaysia</h2>
-    <div id="dot_map"></div>
+    <div id="dot_map1"></div>
     <h2>Top 10 Busiest International Routes in Malaysia</h2>
     <div id="bar_vis1"></div>
   </main>
   <script>
     vegaEmbed('#dot_map', 'js/domestic_routes.vg.json', { actions: false, renderer: "svg" });
-    vegaEmbed('#bar_vis1', 'js/domestic_stats.vg.json', { actions: false, renderer: "svg" });
-    vegaEmbed('#dot_map', 'js/international_routes.vg.json', { actions: false, renderer: "svg" });
+    vegaEmbed('#bar_vis', 'js/domestic_stats.vg.json', { actions: false, renderer: "svg" });
+    vegaEmbed('#dot_map1', 'js/international_routes.vg.json', { actions: false, renderer: "svg" });
     vegaEmbed('#bar_vis1', 'js/international_stats.vg.json', { actions: false, renderer: "svg" });
   </script>
 </body>

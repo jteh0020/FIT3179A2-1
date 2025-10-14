@@ -1,3 +1,51 @@
+#dot_map {
+  width: min(96vw, 600px);   /* responsive width, max 1100px */
+  min-height: 300px;          /* taller than 420px for better map visibility */
+  margin: 0 auto;             /* center horizontally */
+  display: block;
+  border: 1px solid #ddd;     /* subtle border around the map */
+  border-radius: 8px;         /* rounded corners */
+  background-color: #fafafa;  /* light background for contrast */
+  padding: 10px;
+}
+
+.vega-embed,
+.vega-embed > * {
+  width: 100% !important;
+  height: auto !important;
+}
+
+#bar_vis {
+  width: min(96vw, 700px);
+  min-height: 350px;          /* ensures it has space to render */
+  margin: 30px auto;          /* adds spacing from the map */
+  display: block;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+  padding: 10px;
+}
+
+/* Center the selector dropdown above the map */
+#selector-container {
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* Slightly adjust the dropdown styling */
+.vega-bind-name {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.vega-bind select {
+  padding: 3px 6px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
 #dot_map1 {
   width: min(96vw, 600px);   /* responsive width, max 1100px */
   min-height: 300px;          /* taller than 420px for better map visibility */
