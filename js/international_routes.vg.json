@@ -9,7 +9,7 @@
   },
   "width": 900,
   "height": 450,
-"projection": {"type": "mercator", "scale": 180, "center": [110, 10]},
+  "projection": {"type": "mercator", "scale": 180, "center": [110, 10]},
 
   "params": [
     {
@@ -60,6 +60,26 @@
         "longitude": {"field": "Long1"},
         "latitude": {"field": "Lat1"},
         "tooltip": [{"field": "City1", "title": "Origin Airport"}]
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
+        "format": {"type": "csv"}
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5,
+        "dy": 0,
+        "fontSize": 5,
+        "fontWeight": "bold",
+        "color": "black"
+      },
+      "encoding": {
+        "longitude": {"field": "Long1"},
+        "latitude": {"field": "Lat1"},
+        "text": {"field": "City1"}
       }
     }
   ]
