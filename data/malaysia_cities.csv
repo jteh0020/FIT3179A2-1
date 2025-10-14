@@ -1,29 +1,29 @@
-City,Longitude,Latitude
-Alor Setar,100.398,6.18967
-Bario,115.479,3.73389
-Kota Kinabalu,116.051,5.93721
-Bintulu,113.02,3.12385
-Ipoh,101.092,4.56797
-Johor Bahru,103.67,1.64131
-Kota Baharu,102.293,6.16685
-Kuching,110.347,1.4847
-Kuantan,103.209,3.77539
-Kuala Lumpur,101.71,2.74558
-Long Banga,115.402,3.202
-Labuan,115.25,5.30068
-Lahad Datu,118.324,5.03225
-Langkawi,99.7287,6.32973
-Limbang,115.01,4.8083
-Lawas,115.408,4.84917
-Mukah,112.08,2.90639
-Malacca,102.252,2.26336
-Miri,113.987,4.32201
-Mulu,114.805,4.04833
-Penang,100.277,5.29714
-Redang,103.007,5.76528
-Sibu,111.985,2.2616
-Sandakan,118.059,5.9009
-Subang,101.549,3.13058
-Kuala Terengganu,103.103,5.38264
-Tioman Island,104.16,2.81818
-Tawau,118.128,4.32016
+City,Latitude,Longtitude
+Alor Setar,6.18967,100.398
+Bario,3.73389,115.479
+Kota Kinabalu,5.93721,116.051
+Bintulu,3.12385,113.02
+Ipoh,4.56797,101.092
+Johor Bahru,1.64131,103.67
+Kota Baharu,6.16685,102.293
+Kuching,1.4847,110.347
+Kuantan,3.77539,103.209
+Kuala Lumpur,2.74558,101.71
+Long Banga,3.202,115.402
+Labuan,5.30068,115.25
+Lahad Datu,5.03225,118.324
+Langkawi,6.32973,99.7287
+Limbang,4.8083,115.01
+Lawas,4.84917,115.408
+Mukah,2.90639,112.08
+Malacca,2.26336,102.252
+Miri,4.32201,113.987
+Mulu,4.04833,114.805
+Penang,5.29714,100.277
+Redang,5.76528,103.007
+Sibu,2.2616,111.985
+Sandakan,5.9009,118.059
+Subang,3.13058,101.549
+Kuala Terengganu,5.38264,103.103
+Tioman Island,2.81818,104.16
+Tawau,4.32016,118.128
