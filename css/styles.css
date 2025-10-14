@@ -1,4 +1,4 @@
-#dot_map {
+#dot_map1 {
   width: min(96vw, 600px);   /* responsive width, max 1100px */
   min-height: 300px;          /* taller than 420px for better map visibility */
   margin: 0 auto;             /* center horizontally */
