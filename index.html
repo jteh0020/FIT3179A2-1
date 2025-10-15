@@ -88,6 +88,9 @@
       cities such as Singapore, Bangkok, Jakarta, and Hong Kong, reflecting strong economic and tourism ties in the region.
     </p>
     <div id="bar_vis1"></div>
+    <h2>Passenger Movement by Major Malaysian Airports (2017–2024)</h2>
+    <div id="stacked_bar_chart"></div>
+
 
     <footer>
       <p>
@@ -96,6 +99,7 @@
       </p>
     </footer>
   </main>
+  
 
   <!-- Embed Vega visualizations -->
   <script>
@@ -103,6 +107,7 @@
     vegaEmbed('#bar_vis', 'js/domestic_stats.vg.json', { actions: false, renderer: "svg" });
     vegaEmbed('#dot_map1', 'js/international_routes.vg.json', { actions: false, renderer: "svg" });
     vegaEmbed('#bar_vis1', 'js/international_stats.vg.json', { actions: false, renderer: "svg" });
+    vegaEmbed('#stacked_bar_chart', 'js/stacked_bar_chart.vg.json', { actions: false,renderer:"svg"});
   </script>
 </body>
 </html>

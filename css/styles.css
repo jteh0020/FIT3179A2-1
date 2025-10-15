@@ -73,6 +73,35 @@
   background-color: #fafafa;
   padding: 10px;
 }
+#stacked_bar_chart {
+  width: min(96vw, 700px);      /* responsive width like #bar_vis */
+  min-height: 350px;            /* ensures visibility */
+  margin: 30px auto;            /* spacing from other charts */
+  display: block;
+  border: 1px solid #ddd;       /* consistent border */
+  border-radius: 8px;           /* rounded corners */
+  background-color: #fafafa;    /* light gray background for contrast */
+  padding: 10px;
+}
+
+/* Title styling consistent with map and bar chart */
+#stacked_bar_chart h2 {
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+/* Consistent dropdown and control styling */
+#stacked-selector-container {
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
 
 /* Center the selector dropdown above the map */
 #selector-container {
