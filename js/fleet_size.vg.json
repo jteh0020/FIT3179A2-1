@@ -1,0 +1,69 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Airline Fleet Trend by Year (2017–2025)",
+    "fontSize": 18,
+    "fontWeight": "bold",
+    "anchor": "middle"
+  },
+  "width": 900,
+  "height": 500,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/fleet.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {
+      "fold": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "as": ["Year", "Value"]
+    },
+    {
+      "calculate": "toNumber(datum.Value)",
+      "as": "ValueNum"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "point": true,
+    "strokeWidth": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year",
+      "axis": {"labelAngle": 0}
+    },
+    "y": {
+      "field": "ValueNum",
+      "type": "quantitative",
+      "title": "Number of Aircraft / Passengers"
+    },
+    "color": {
+      "field": "NAME",
+      "type": "nominal",
+      "title": "Airline",
+      "scale": {"scheme": "tableau10"}
+    },
+    "tooltip": [
+      {"field": "NAME", "title": "Airline"},
+      {"field": "Year", "title": "Year"},
+      {"field": "ValueNum", "title": "Value"}
+    ]
+  },
+  "config": {
+    "legend": {"orient": "bottom", "title": null},
+    "view": {"stroke": "transparent"},
+    "axis": {"labelFontSize": 12, "titleFontSize": 13}
+  }
+}
