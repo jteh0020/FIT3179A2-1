@@ -6,31 +6,100 @@
     "fontWeight": "bold",
     "anchor": "middle"
   },
-  "width": 800,
-  "height": 600,
+  "width": 1500,
+  "height": 500,
   "data": {
     "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/pass_year.csv",
     "format": {"type": "csv"}
   },
   "transform": [
-    {"filter": "!match(trim(datum.Airport), /Peninsular|SABAH|SARAWAK|Total/i)"},
-    {"fold": ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"], "as": ["Year", "Passengers"]},
-    {"calculate": "datum.Passengers == '' ? 0 : toNumber(datum.Passengers)", "as": "PassengersNum"},
-    {"filter": "datum.PassengersNum >= 0"}
+    {
+      "fold": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "as": ["Year", "Passengers"]
+    },
+    {
+      "calculate": "toNumber(datum.Passengers)",
+      "as": "PassengersNum"
+    }
+  ],
+  "params": [
+    {
+      "name": "year_selection",
+      "value": "2024",
+      "bind": {
+        "input": "select",
+        "options": [
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024"
+        ],
+        "name": "Select Year: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "fold": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "as": ["Year", "Passengers"]
+    },
+    {
+      "calculate": "toNumber(datum.Passengers)",
+      "as": "PassengersNum"
+    },
+    {
+      "filter": "datum.Year == year_selection"
+    }
   ],
   "mark": {"type": "bar"},
   "encoding": {
-    "x": {"field": "Year", "type": "ordinal", "title": "Year", "axis": {"labelAngle": 0}},
-    "y": {"field": "PassengersNum", "type": "quantitative", "title": "Passengers", "axis": {"format": ",.0f"}},
-    "color": {"field": "Airport", "type": "nominal", "title": "Airport", "scale": {"scheme": "category20"}},
+    "x": {
+      "field": "Airport",
+      "type": "nominal",
+      "sort": "-y",
+      "title": "Airport",
+      "axis": {"labelAngle": -45}
+    },
+    "y": {
+      "field": "PassengersNum",
+      "type": "quantitative",
+      "title": "Passengers"
+    },
+    "color": {
+      "field": "Airport",
+      "type": "nominal",
+      "legend": null,
+      "scale": {"scheme": "tableau10"}
+    },
     "tooltip": [
       {"field": "Airport", "title": "Airport"},
       {"field": "Year", "title": "Year"},
-      {"field": "PassengersNum", "title": "Passengers", "format": ","}
+      {"field": "PassengersNum", "title": "Total Passengers"}
     ]
   },
   "config": {
-    "legend": {"orient": "bottom", "title": null, "columns": 5, "symbolLimit": 50},
     "view": {"stroke": "transparent"},
     "axis": {"labelFontSize": 12, "titleFontSize": 13}
   }

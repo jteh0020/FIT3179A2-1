@@ -123,3 +123,26 @@
   border-radius: 5px;
   background-color: #fff;
 }
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background-color: #fafafa;
+  color: #222;
+  margin: 40px;
+  text-align: center;
+}
+
+h1, h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+#stacked_bar_chart {
+  margin: auto;
+  width: 90%;
+  max-width: 900px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
