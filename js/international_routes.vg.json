@@ -7,7 +7,7 @@
     "fontWeight": "bold",
     "dy": -10
   },
-  "width": 900,
+  "width": 1000,
   "height": 450,
   "projection": {"type": "mercator", "scale": 180, "center": [110, 10]},
 
@@ -15,7 +15,22 @@
     {
       "name": "year_select",
       "value": 2017,
-      "bind": {"input": "range", "min": 2017, "max": 2024, "step": 1, "name": "Select Year: "}
+      "bind": {
+        "input": "range",
+        "min": 2017,
+        "max": 2024,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    },
+    {
+      "name": "region_select",
+      "value": "All",
+      "bind": {
+        "input": "select",
+        "options": ["All", "Asia", "Europe", "Middle East", "Oceania"],
+        "name": "Select Region: "
+      }
     }
   ],
 
@@ -31,12 +46,20 @@
       },
       "mark": {"type": "geoshape", "fill": "#f0f0f0", "stroke": "#333", "strokeWidth": 0.5}
     },
+
     {
       "data": {
         "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
         "format": {"type": "csv"}
       },
-      "transform": [{"filter": "datum.Year == year_select"}],
+      "transform": [
+        {"filter": "datum.Year == year_select"},
+        {
+          "calculate": "datum.Region ? datum.Region : (indexof(['Malaysia','Thailand','Singapore','Vietnam','Indonesia','Philippines','Laos','Cambodia','Myanmar','Brunei Darussalam','China','Japan','South Korea','India','Bangladesh','Nepal','Sri Lanka','Pakistan'], datum.Country) >= 0 ? 'Asia' : indexof(['Australia','New Zealand'], datum.Country) >= 0 ? 'Oceania' : indexof(['United Kingdom','France','Germany','Netherlands'], datum.Country) >= 0 ? 'Europe' : indexof(['United Arab Emirates','Saudi Arabia','Qatar','Oman','Iran','Türkiye','Kuwait'], datum.Country) >= 0 ? 'Middle East' : 'Other')",
+          "as": "Region"
+        },
+        {"filter": "region_select == 'All' || datum.Region == region_select"}
+      ],
       "mark": {"type": "rule", "stroke": "steelblue", "strokeWidth": 1.2, "opacity": 0.6},
       "encoding": {
         "longitude": {"field": "Long1", "type": "quantitative"},
@@ -46,15 +69,26 @@
         "tooltip": [
           {"field": "City1", "title": "From"},
           {"field": "City2", "title": "To"},
+          {"field": "Country", "title": "Destination Country"},
+          {"field": "Region", "title": "Region"},
           {"field": "Year", "title": "Year"}
         ]
       }
     },
+
     {
       "data": {
         "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
         "format": {"type": "csv"}
       },
+      "transform": [
+        {"filter": "datum.Year == year_select"},
+        {
+          "calculate": "datum.Region ? datum.Region : (indexof(['Malaysia','Thailand','Singapore','Vietnam','Indonesia','Philippines','Laos','Cambodia','Myanmar','Brunei Darussalam','China','Japan','South Korea','India','Bangladesh','Nepal','Sri Lanka','Pakistan'], datum.Country) >= 0 ? 'Asia' : indexof(['Australia','New Zealand'], datum.Country) >= 0 ? 'Oceania' : indexof(['United Kingdom','France','Germany','Netherlands'], datum.Country) >= 0 ? 'Europe' : indexof(['United Arab Emirates','Saudi Arabia','Qatar','Oman','Iran','Türkiye','Kuwait'], datum.Country) >= 0 ? 'Middle East' : 'Other')",
+          "as": "Region"
+        },
+        {"filter": "region_select == 'All' || datum.Region == region_select"}
+      ],
       "mark": {"type": "circle", "color": "red", "size": 10, "opacity": 0.9},
       "encoding": {
         "longitude": {"field": "Long1"},
@@ -62,11 +96,20 @@
         "tooltip": [{"field": "City1", "title": "Origin Airport"}]
       }
     },
+
     {
       "data": {
         "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
         "format": {"type": "csv"}
       },
+      "transform": [
+        {"filter": "datum.Year == year_select"},
+        {
+          "calculate": "datum.Region ? datum.Region : (indexof(['Malaysia','Thailand','Singapore','Vietnam','Indonesia','Philippines','Laos','Cambodia','Myanmar','Brunei Darussalam','China','Japan','South Korea','India','Bangladesh','Nepal','Sri Lanka','Pakistan'], datum.Country) >= 0 ? 'Asia' : indexof(['Australia','New Zealand'], datum.Country) >= 0 ? 'Oceania' : indexof(['United Kingdom','France','Germany','Netherlands'], datum.Country) >= 0 ? 'Europe' : indexof(['United Arab Emirates','Saudi Arabia','Qatar','Oman','Iran','Türkiye','Kuwait'], datum.Country) >= 0 ? 'Middle East' : 'Other')",
+          "as": "Region"
+        },
+        {"filter": "region_select == 'All' || datum.Region == region_select"}
+      ],
       "mark": {
         "type": "text",
         "align": "left",
