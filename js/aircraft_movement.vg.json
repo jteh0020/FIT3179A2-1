@@ -1,0 +1,59 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Aircraft Movements by Major Malaysian Airports (2017–2024)",
+    "fontSize": 18,
+    "fontWeight": "bold",
+    "anchor": "middle"
+  },
+  "width": 850,
+  "height": 450,
+  "data": {
+    "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/aircraft_movement.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {
+      "fold": ["2017","2018","2019","2020","2021","2022","2023","2024"],
+      "as": ["Year","Movements"]
+    },
+    {
+      "calculate": "toNumber(replace(datum.Movements, ',', ''))",
+      "as": "MovementsNum"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "point": {"filled": true, "size": 40},
+    "strokeWidth": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year",
+      "axis": {"labelAngle": 0}
+    },
+    "y": {
+      "field": "MovementsNum",
+      "type": "quantitative",
+      "title": "Aircraft Movements"
+    },
+    "color": {
+      "field": "Airport",
+      "type": "nominal",
+      "title": "Airport",
+      "legend": {"orient": "right"}
+    },
+    "tooltip": [
+      {"field": "Airport", "title": "Airport"},
+      {"field": "Year"},
+      {"field": "MovementsNum", "title": "Movements", "format": ","}
+    ]
+  },
+  "config": {
+    "background": "#fafafa",
+    "axis": {"labelFontSize": 13, "titleFontSize": 15},
+    "legend": {"labelFontSize": 13, "titleFontSize": 14}
+  }
+}
