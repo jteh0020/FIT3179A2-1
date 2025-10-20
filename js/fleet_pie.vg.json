@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Malaysian Airlines Fleet Composition by Type (2017–2025)",
-    "fontSize": 18,
+    "fontSize": 12,
     "fontWeight": "bold",
     "anchor": "middle"
   },
