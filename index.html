@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Air Travel In Malaysia</title>
+  <title>Air Travel in Malaysia</title>
 
   <!-- Vega & Vega-Lite libraries -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
@@ -14,24 +14,64 @@
   <link rel="stylesheet" href="css/styles.css">
 
   <style>
-    /* Optional: add light styling if styles.css doesn’t exist */
-    body {
-      font-family: "Segoe UI", Roboto, sans-serif;
-      background: #fafafa;
-      margin: 0;
-      padding: 0;
-      color: #333;
+    /* ===== Base styling ===== */
+    :root {
+      --primary: #005b96;
+      --accent: #1b98e0;
+      --bg: #f8f9fa;
+      --text: #333;
     }
 
-    main.page {
-      max-width: 1000px;
-      margin: auto;
-      padding: 2rem;
+    body {
+      font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: var(--primary);
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 1.2rem;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
     }
 
     h1, h2 {
+      color: var(--primary);
       text-align: center;
-      color: #1b3a57;
+    }
+
+    h1 {
+      margin-bottom: 0.5rem;
     }
 
     p {
@@ -39,78 +79,168 @@
       text-align: justify;
     }
 
-    #dot_map, #dot_map1, #bar_vis, #bar_vis1 {
-      margin: 2rem 0;
+    section.card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .chart-container {
+      margin-top: 1rem;
     }
 
     footer {
       text-align: center;
-      margin-top: 3rem;
-      font-size: 0.9em;
+      padding: 2rem 1rem;
       color: #777;
+      font-size: 0.9em;
+    }
+
+    .city-table {
+      border-collapse: collapse;
+      margin: 1rem auto;
+      width: 90%;
+      font-size: 0.95em;
+    }
+
+    .city-table th, .city-table td {
+      border: 1px solid #ddd;
+      padding: 8px 10px;
+      text-align: center;
+    }
+
+    .city-table th {
+      background-color: var(--accent);
+      color: #fff;
+    }
+
+    .city-table td:first-child {
+      font-weight: bold;
+      background: #f1faff;
     }
   </style>
 </head>
+
 <body>
-  <main class="page">
-    <h1>Air Travel in Malaysia</h1>
-    <p>
-      This interactive dashboard provides a visual overview of air travel patterns in Malaysia, focusing on both
-      <strong>domestic</strong> and <strong>international</strong> flight routes. The visualizations below explore how Malaysia’s
-      airports connect various regions, highlighting the busiest flight corridors and travel trends.
-    </p>
+  <header role="banner">
+    <div class="header-inner">
+      <h2>✈️ Air Travel in Malaysia</h2>
+      <nav aria-label="Main navigation">
+        <a href="#domestic-map">Domestic</a>
+        <a href="#international-map">International</a>
+        <a href="#airport-trends">Trends</a>
+      </nav>
+    </div>
+  </header>
 
-    <h2>Domestic Air Travel in Malaysia</h2>
-    <p>
-      The map below illustrates the domestic flight connections between airports within Malaysia. Each dot or line represents
-      a route, where denser connections indicate higher traffic between cities. Major domestic hubs such as Kuala Lumpur (KUL),
-      Kota Kinabalu (BKI), and Penang (PEN) tend to dominate the network.
-    </p>
-    <div id="dot_map"></div>
+  <main>
+    <section class="card" id="intro">
+      <h1>Air Travel in Malaysia</h1>
+      <p>
+        This interactive dashboard provides a visual overview of <strong>air travel patterns in Malaysia</strong>, 
+        focusing on both <strong>domestic</strong> and <strong>international</strong> flight routes. 
+        Explore how Malaysia’s airports connect regions across the country and around the world, 
+        highlighting key hubs and travel trends over time.
+      </p>
+    </section>
 
-    <h2>Top 10 Busiest Domestic Routes in Malaysia</h2>
-    <p>
-      The bar chart presents the ten most heavily trafficked domestic routes, measured by flight frequency or passenger count.
-      These routes are critical for connecting Malaysia’s economic and tourism centers.
-    </p>
-    <div id="bar_vis"></div>
+    <section class="card" id="domestic-map">
+      <h2>Domestic Air Travel in Malaysia</h2>
+      <p>
+        The map below illustrates <strong>domestic flight connections</strong> between Malaysian airports. 
+        Each dot or line represents a route — denser networks indicate higher traffic volumes. 
+        Major domestic hubs include <em>Kuala Lumpur (KUL)</em>, <em>Kota Kinabalu (BKI)</em>, and <em>Penang (PEN)</em>.
+      </p>
+      <div class="chart-container" id="dot_map"></div>
+    </section>
 
-    <h2>International Air Travel in Malaysia</h2>
-    <p>
-      The following map shows Malaysia’s international air travel network. Lines extend from Malaysian airports to major global
-      destinations, showcasing Malaysia’s role as a regional aviation hub in Southeast Asia.
-    </p>
-    <div id="dot_map1"></div>
+    <section class="card">
+      <h2>Top 10 Busiest Domestic Routes</h2>
+      <p>
+        This bar chart presents the ten most heavily trafficked domestic routes, measured by flight frequency or passenger volume.
+      </p>
+      <div class="chart-container" id="bar_vis"></div>
+    </section>
 
-    <h2>Top 10 Busiest International Routes in Malaysia</h2>
-    <p>
-      The bar chart below highlights Malaysia’s busiest international flight connections. These routes link Malaysia to major
-      cities such as Singapore, Bangkok, Jakarta, and Hong Kong, reflecting strong economic and tourism ties in the region.
-    </p>
-    <div id="bar_vis1"></div>
-    <h2>Passenger Movement by Major Malaysian Airports (2017–2024)</h2>
-    <div id="stacked_bar_chart"></div>
-    <h2>Malaysian Carrier Fleet Size</h2>
-    <div id="line_chart"></div>
+    <section class="card" id="international-map">
+      <h2>International Air Travel in Malaysia</h2>
+      <p>
+        The map below displays Malaysia’s <strong>international air travel network</strong>. 
+        Lines extend from Malaysian airports to major global destinations, highlighting 
+        Malaysia’s role as a <strong>regional aviation hub</strong> in Southeast Asia.
+      </p>
+      <div class="chart-container" id="dot_map1"></div>
 
+      <h3 style="text-align:center; margin-top:2rem;">Connected Cities by Country</h3>
+      <table class="city-table">
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>Cities with Direct Flights to Malaysia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Singapore</td><td>Singapore</td></tr>
+          <tr><td>Thailand</td><td>Bangkok, Phuket, Hat Yai, Krabi</td></tr>
+          <tr><td>Indonesia</td><td>Jakarta, Medan, Surabaya, Bali (Denpasar)</td></tr>
+          <tr><td>China</td><td>Beijing, Shanghai, Guangzhou, Shenzhen, Xiamen</td></tr>
+          <tr><td>Australia</td><td>Sydney, Melbourne, Perth</td></tr>
+          <tr><td>Vietnam</td><td>Ho Chi Minh City, Hanoi</td></tr>
+          <tr><td>Philippines</td><td>Manila</td></tr>
+          <tr><td>Japan</td><td>Tokyo, Osaka</td></tr>
+          <tr><td>South Korea</td><td>Seoul</td></tr>
+          <tr><td>India</td><td>New Delhi, Chennai, Bengaluru</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Top 10 Busiest International Routes</h2>
+      <p>
+        The bar chart below highlights Malaysia’s busiest international flight connections.
+        These routes link Malaysia to major cities such as Singapore, Bangkok, and Jakarta — 
+        reflecting strong economic and tourism relationships across the region.
+      </p>
+      <div class="chart-container" id="bar_vis1"></div>
+    </section>
+
+    <section class="card" id="airport-trends">
+      <h2>Passenger Movement by Major Malaysian Airports (2017–2024)</h2>
+      <p>
+        This stacked bar chart shows passenger traffic trends at major Malaysian airports. 
+        It highlights how international recovery post-pandemic affected traffic in key hubs.
+      </p>
+      <div class="chart-container" id="stacked_bar_chart"></div>
+    </section>
+
+    <section class="card">
+      <h2>Malaysian Carrier Fleet Size</h2>
+      <p>
+        The line chart below illustrates the fleet size of major Malaysian carriers over time — 
+        offering insight into industry growth and capacity expansion trends.
+      </p>
+      <div class="chart-container" id="line_chart"></div>
+    </section>
 
     <footer>
       <p>
-        Data source: <em>Malaysia Airports and OpenSky Network (example)</em><br>
-        Visualization created using <a href="https://vega.github.io/" target="_blank">Vega-Lite</a>.
+        Data sources: <em>Malaysia Airports, OpenSky Network</em><br>
+        Visualisation created with <a href="https://vega.github.io/" target="_blank">Vega-Lite</a> |
+        Designed by <strong>Your Name</strong>
       </p>
     </footer>
   </main>
-  
 
-  <!-- Embed Vega visualizations -->
+  <!-- Vega-Lite Embeds -->
   <script>
     vegaEmbed('#dot_map', 'js/domestic_routes.vg.json', { actions: false, renderer: "svg" });
     vegaEmbed('#bar_vis', 'js/domestic_stats.vg.json', { actions: false, renderer: "svg" });
     vegaEmbed('#dot_map1', 'js/international_routes.vg.json', { actions: false, renderer: "svg" });
     vegaEmbed('#bar_vis1', 'js/international_stats.vg.json', { actions: false, renderer: "svg" });
-    vegaEmbed('#stacked_bar_chart', 'js/stacked_bar_chart.vg.json', { actions: false,renderer:"svg"});
-    vegaEmbed('#line_chart', 'js/fleet_size.vg.json', { actions: false,renderer:"svg"});
+    vegaEmbed('#stacked_bar_chart', 'js/stacked_bar_chart.vg.json', { actions: false, renderer: "svg" });
+    vegaEmbed('#line_chart', 'js/fleet_size.vg.json', { actions: false, renderer: "svg" });
   </script>
 </body>
 </html>

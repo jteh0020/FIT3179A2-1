@@ -53,35 +53,7 @@
         "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/js/malaysia_map.json",
         "format": {"type": "topojson", "feature": "malaysia_map"}
       },
-      "mark": {"type": "geoshape", "fill": "#f0f0f0", "stroke": "#333", "strokeWidth": 1},
-      "encoding": {
-      }
-    },
-    {
-      "data": {
-        "values": [
-          {"state": "Johor", "longitude": 103.76, "latitude": 1.46, "short": "JHR"},
-          {"state": "Kedah", "longitude": 100.37, "latitude": 6.05, "short": "KDH"},
-          {"state": "Kelantan", "longitude": 102.25, "latitude": 6.29, "short": "KLT"},
-          {"state": "Melaka", "longitude": 102.25, "latitude": 2.20, "short": "MLK"},
-          {"state": "Negeri Sembilan", "longitude": 101.94, "latitude": 2.72, "short": "NSN"},
-          {"state": "Pahang", "longitude": 103.33, "latitude": 3.88, "short": "PHG"},
-          {"state": "Pulau Pinang", "longitude": 100.11, "latitude": 5.1, "short": "PNG"},
-          {"state": "Perak", "longitude": 101.08, "latitude": 4.60, "short": "PRK"},
-          {"state": "Sabah", "longitude": 116.07, "latitude": 5.98, "short": "SBH"},
-          {"state": "Sarawak", "longitude": 110.34, "latitude": 1.56, "short": "SWK"},
-          {"state": "Selangor", "longitude": 101.52, "latitude": 3.25, "short": "SGR"},
-          {"state": "Terengganu", "longitude": 103.14, "latitude": 5.25, "short": "TRG"},
-          {"state": "Federal Territory of Kuala Lumpur", "longitude": 101, "latitude": 3.15, "short": "KUL"},
-          {"state": "Federal Territory of Labuan", "longitude": 115.22, "latitude": 5.30, "short": "LBN"}
-        ]
-      },
-      "mark": {"type": "text", "fontSize": 10, "fontWeight": "bold", "color": "black"},
-      "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
-        "text": {"field": "short", "type": "nominal"}
-      }
+      "mark": {"type": "geoshape", "fill": "#f0f0f0", "stroke": "#333", "strokeWidth": 1}
     },
     {
       "data": {
@@ -104,10 +76,20 @@
         "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/malaysia_cities.csv",
         "format": {"type": "csv"}
       },
+      "transform": [
+        {
+          "calculate": "datum.City == 'Kuala Lumpur' ? datum.Longitude + 1 : datum.City == 'Subang' ? datum.Longitude - 0.4 : datum.City == 'Penang' ? datum.Longitude - 0.4 : datum.City == 'Limbang' ? datum.Longitude -0.1  : datum.Longitude",
+          "as": "adjusted_lon"
+        },
+        {
+          "calculate": "datum.City == 'Kuala Lumpur' ? datum.Latitude - 0.1 : datum.City == 'Subang' ? datum.Latitude - 0.09 : datum.City == 'Penang' ? datum.Latitude - 0.15 : datum.City == 'Limbang' ? datum.Latitude -0.2 : datum.Latitude",
+          "as": "adjusted_lat"
+        }
+      ],
       "mark": {"type": "text", "fontSize": 10, "color": "darkblue"},
       "encoding": {
-        "longitude": {"field": "Longitude"},
-        "latitude": {"field": "Latitude"},
+        "longitude": {"field": "adjusted_lon"},
+        "latitude": {"field": "adjusted_lat"},
         "text": {"field": "City", "type": "nominal"},
         "dy": {"value": -6}
       }
@@ -160,7 +142,7 @@
         },
         {"filter": "state_selection == 'All' || datum.State == state_selection"}
       ],
-      "mark": {"type": "rule", "stroke": "steelblue", "strokeWidth": 1.2, "opacity": 0.6},
+      "mark": {"type": "rule", "stroke": "#4682b4", "strokeWidth": 1.2, "opacity": 0.6},
       "encoding": {
         "longitude": {"field": "Long1", "type": "quantitative"},
         "latitude": {"field": "Lat1", "type": "quantitative"},
@@ -171,17 +153,26 @@
           {"field": "City2", "type": "nominal", "title": "To"},
           {"field": "Year", "type": "quantitative", "title": "Year"},
           {"field": "State", "type": "nominal", "title": "Origin State"}
-        ],
-        "color": {"field": "State", "type": "nominal", "legend": {"title": "Origin State"}}
+        ]
       }
     },
     {
       "data": {
         "values": [
-          {"longitude": 110, "latitude": -2, "text": "Domestic Flight Routes Across Major Malaysian Airports (2017–2024)"}
+          {
+            "longitude": 110,
+            "latitude": -2,
+            "text": "Domestic Flight Routes Across Major Malaysian Airports (2017–2024)"
+          }
         ]
       },
-      "mark": {"type": "text", "fontSize": 16, "fontWeight": "bold", "color": "#222", "align": "center"},
+      "mark": {
+        "type": "text",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "color": "#222",
+        "align": "center"
+      },
       "encoding": {
         "longitude": {"field": "longitude", "type": "quantitative"},
         "latitude": {"field": "latitude", "type": "quantitative"},

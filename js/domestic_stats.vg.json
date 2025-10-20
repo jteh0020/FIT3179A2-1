@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Top 10 Busiest Domestic Routes (2017–2024)",
+  "title": "Top 10 Busiest Domestic Routes in Malaysia (2017–2024)",
   "width": 700,
   "height": 450,
   "data": {
@@ -13,7 +13,7 @@
       }
     }
   },
-  
+
   "params": [
     {
       "name": "year_select",
@@ -30,8 +30,9 @@
 
   "transform": [
     { "filter": "isValid(datum.Year) && datum.Year == year_select" },
+
     {
-      "calculate": "datum.City1 + ' → ' + datum.City2",
+      "calculate": "datum.City1 < datum.City2 ? datum.City1 + ' ↔ ' + datum.City2 : datum.City2 + ' ↔ ' + datum.City1",
       "as": "Route"
     },
     {
@@ -47,7 +48,7 @@
     { "filter": "datum.rank <= 10" }
   ],
 
-  "mark": {"type": "bar", "cornerRadiusEnd": 3},
+  "mark": { "type": "bar", "cornerRadiusEnd": 3, "color": "#006DAE" },
 
   "encoding": {
     "y": {
@@ -59,17 +60,16 @@
     "x": {
       "field": "Total_Trips",
       "type": "quantitative",
-      "title": "Passenger Trips"
-    },
-    "color": {
-      "field": "Total_Trips",
-      "type": "quantitative",
-      "scale": {"scheme": "blues"},
-      "legend": {"title": "Passenger Trips"}
+      "title": "Passenger Trips Per Month"
     },
     "tooltip": [
-      {"field": "Route", "type": "nominal", "title": "Route"},
-      {"field": "Total_Trips", "type": "quantitative", "title": "Passenger Trips", "format": ","}
+      { "field": "Route", "type": "nominal", "title": "Route" },
+      {
+        "field": "Total_Trips",
+        "type": "quantitative",
+        "title": "Passenger Trips",
+        "format": ","
+      }
     ]
   }
-} 
+}

@@ -3,75 +3,87 @@
   "title": {
     "text": "International Flight Routes Across Major Malaysian Airports (2017–2024)",
     "anchor": "middle",
-    "fontSize": 18,
+    "fontSize": 45,
     "fontWeight": "bold",
     "dy": -10
   },
-  "width": 1000,
-  "height": 450,
-  "projection": {"type": "mercator", "scale": 180, "center": [110, 10]},
+  "width": 3000,
+  "height": 2000,
+  "projection": { "type": "mercator", "scale": 900, "center": [84, 10] },
 
   "params": [
     {
       "name": "year_select",
-      "value": 2017,
+      "value": 2024,
       "bind": {
         "input": "range",
         "min": 2017,
-        "max": 2024,
+        "max": 2025,
         "step": 1,
         "name": "Select Year: "
       }
     },
     {
-      "name": "region_select",
+      "name": "country_select",
       "value": "All",
       "bind": {
         "input": "select",
-        "options": ["All", "Asia", "Europe", "Middle East", "Oceania"],
-        "name": "Select Region: "
+        "options": [
+          "All",
+          "China",
+          "Malaysia",
+          "Thailand",
+          "Singapore",
+          "Vietnam",
+          "Indonesia",
+          "Philippines",
+          "Japan",
+          "South Korea",
+          "India",
+          "Australia",
+          "United Kingdom",
+          "United Arab Emirates"
+        ],
+        "name": "Filter by Country: "
       }
     }
   ],
 
   "layer": [
     {
-      "data": {"graticule": {"step": [20, 20]}},
-      "mark": {"type": "geoshape", "stroke": "#ccc", "strokeDash": [2, 2], "opacity": 0.8}
+      "data": { "graticule": { "step": [20, 20] } },
+      "mark": { "type": "geoshape", "stroke": "#ccc", "strokeDash": [2, 2], "opacity": 0.8 }
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/js/ne_10m_admin_0_countries.json",
-        "format": {"type": "topojson", "feature": "ne_10m_admin_0_countries"}
+        "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/js/map3.json",
+        "format": { "type": "topojson", "feature": "asiaeu" }
       },
-      "mark": {"type": "geoshape", "fill": "#f0f0f0", "stroke": "#333", "strokeWidth": 0.5}
+      "mark": { "type": "geoshape", "fill": "#f0f0f0", "stroke": "#333", "strokeWidth": 0.9 }
     },
 
     {
       "data": {
         "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
-        "format": {"type": "csv"}
+        "format": { "type": "csv" }
       },
       "transform": [
-        {"filter": "datum.Year == year_select"},
-        {
-          "calculate": "datum.Region ? datum.Region : (indexof(['Malaysia','Thailand','Singapore','Vietnam','Indonesia','Philippines','Laos','Cambodia','Myanmar','Brunei Darussalam','China','Japan','South Korea','India','Bangladesh','Nepal','Sri Lanka','Pakistan'], datum.Country) >= 0 ? 'Asia' : indexof(['Australia','New Zealand'], datum.Country) >= 0 ? 'Oceania' : indexof(['United Kingdom','France','Germany','Netherlands'], datum.Country) >= 0 ? 'Europe' : indexof(['United Arab Emirates','Saudi Arabia','Qatar','Oman','Iran','Türkiye','Kuwait'], datum.Country) >= 0 ? 'Middle East' : 'Other')",
-          "as": "Region"
-        },
-        {"filter": "region_select == 'All' || datum.Region == region_select"}
+        { "filter": "datum.Year == year_select" },
+        { "filter": "(country_select == 'All') || (datum.Country1 == country_select) || (datum.Country2 == country_select)" }
       ],
-      "mark": {"type": "rule", "stroke": "steelblue", "strokeWidth": 1.2, "opacity": 0.6},
+      "mark": { "type": "rule", "stroke": "steelblue", "strokeWidth": 1.2, "opacity": 0.4 },
       "encoding": {
-        "longitude": {"field": "Long1", "type": "quantitative"},
-        "latitude": {"field": "Lat1", "type": "quantitative"},
-        "longitude2": {"field": "Long2", "type": "quantitative"},
-        "latitude2": {"field": "Lat2", "type": "quantitative"},
+        "longitude": { "field": "Long1" },
+        "latitude": { "field": "Lat1" },
+        "longitude2": { "field": "Long2" },
+        "latitude2": { "field": "Lat2" },
         "tooltip": [
-          {"field": "City1", "title": "From"},
-          {"field": "City2", "title": "To"},
-          {"field": "Country", "title": "Destination Country"},
-          {"field": "Region", "title": "Region"},
-          {"field": "Year", "title": "Year"}
+          { "field": "City1", "title": "From" },
+          { "field": "Country1", "title": "Country (From)" },
+          { "field": "City2", "title": "To" },
+          { "field": "Country2", "title": "Country (To)" },
+          { "field": "Passenger_Trips", "title": "Passenger Trips Per Month" },
+          { "field": "Year", "title": "Year" }
         ]
       }
     },
@@ -79,50 +91,83 @@
     {
       "data": {
         "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
-        "format": {"type": "csv"}
+        "format": { "type": "csv" }
       },
       "transform": [
-        {"filter": "datum.Year == year_select"},
-        {
-          "calculate": "datum.Region ? datum.Region : (indexof(['Malaysia','Thailand','Singapore','Vietnam','Indonesia','Philippines','Laos','Cambodia','Myanmar','Brunei Darussalam','China','Japan','South Korea','India','Bangladesh','Nepal','Sri Lanka','Pakistan'], datum.Country) >= 0 ? 'Asia' : indexof(['Australia','New Zealand'], datum.Country) >= 0 ? 'Oceania' : indexof(['United Kingdom','France','Germany','Netherlands'], datum.Country) >= 0 ? 'Europe' : indexof(['United Arab Emirates','Saudi Arabia','Qatar','Oman','Iran','Türkiye','Kuwait'], datum.Country) >= 0 ? 'Middle East' : 'Other')",
-          "as": "Region"
-        },
-        {"filter": "region_select == 'All' || datum.Region == region_select"}
+        { "filter": "datum.Year == year_select" },
+        { "filter": "(country_select == 'All') || (datum.Country1 == country_select) || (datum.Country2 == country_select)" },
+        { "filter": "indexof(['Kuala Lumpur','Penang','Kota Kinabalu','Langkawi','Kuching','Subang','Johor Bahru'], datum.City1) >= 0" }
       ],
-      "mark": {"type": "circle", "color": "red", "size": 10, "opacity": 0.9},
+      "mark": { "type": "circle", "color": "red", "size": 150, "opacity": 0.9 },
       "encoding": {
-        "longitude": {"field": "Long1"},
-        "latitude": {"field": "Lat1"},
-        "tooltip": [{"field": "City1", "title": "Origin Airport"}]
+        "longitude": { "field": "Long1" },
+        "latitude": { "field": "Lat1" },
+        "tooltip": [{ "field": "City1", "title": "Origin Airport" }]
       }
     },
 
     {
       "data": {
         "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
-        "format": {"type": "csv"}
+        "format": { "type": "csv" }
       },
       "transform": [
-        {"filter": "datum.Year == year_select"},
-        {
-          "calculate": "datum.Region ? datum.Region : (indexof(['Malaysia','Thailand','Singapore','Vietnam','Indonesia','Philippines','Laos','Cambodia','Myanmar','Brunei Darussalam','China','Japan','South Korea','India','Bangladesh','Nepal','Sri Lanka','Pakistan'], datum.Country) >= 0 ? 'Asia' : indexof(['Australia','New Zealand'], datum.Country) >= 0 ? 'Oceania' : indexof(['United Kingdom','France','Germany','Netherlands'], datum.Country) >= 0 ? 'Europe' : indexof(['United Arab Emirates','Saudi Arabia','Qatar','Oman','Iran','Türkiye','Kuwait'], datum.Country) >= 0 ? 'Middle East' : 'Other')",
-          "as": "Region"
-        },
-        {"filter": "region_select == 'All' || datum.Region == region_select"}
+        { "filter": "datum.Year == year_select" },
+        { "filter": "(country_select == 'All') || (datum.Country1 == country_select) || (datum.Country2 == country_select)" },
+        { "filter": "indexof(['Kuala Lumpur','Penang','Kota Kinabalu','Langkawi','Kuching','Subang','Johor Bahru'], datum.City2) < 0" }
       ],
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "dx": 5,
-        "dy": 0,
-        "fontSize": 5,
-        "fontWeight": "bold",
-        "color": "black"
-      },
+      "mark": { "type": "circle", "color": "#1f77b4", "size": 300, "opacity": 0.9 },
       "encoding": {
-        "longitude": {"field": "Long1"},
-        "latitude": {"field": "Lat1"},
-        "text": {"field": "City1"}
+        "longitude": { "field": "Long2" },
+        "latitude": { "field": "Lat2" },
+        "tooltip": [{ "field": "City2", "title": "Destination Airport" }]
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          { "country": "Malaysia", "lon": 101.7, "lat": 3.1 },
+          { "country": "China", "lon": 104.0, "lat": 35.0 },
+          { "country": "India", "lon": 78.0, "lat": 22.0 },
+          { "country": "Australia", "lon": 134.0, "lat": -25.0 },
+          { "country": "New Zealand", "lon": 172.0, "lat": -39.0 },
+          { "country": "United Kingdom", "lon": -1.5, "lat": 52.0 },
+          { "country": "France", "lon": 2.2, "lat": 46.5 },
+          { "country": "Germany", "lon": 10.5, "lat": 51.0 },
+          { "country": "United Arab Emirates", "lon": 54.4, "lat": 24.5 },
+          { "country": "Qatar", "lon": 50.2, "lat": 26.3 },
+          { "country": "Oman", "lon": 57.5, "lat": 21.0 },
+          { "country": "Türkiye", "lon": 35.2, "lat": 39.0 },
+          { "country": "Singapore", "lon": 103.8, "lat": 1.3 },
+          { "country": "Thailand", "lon": 100.5, "lat": 13.7 },
+          { "country": "Vietnam", "lon": 106.7, "lat": 16.0 },
+          { "country": "Indonesia", "lon": 120.0, "lat": -2.0 },
+          { "country": "Philippines", "lon": 122.0, "lat": 12.0 },
+          { "country": "Brunei Darussalam", "lon": 114.5, "lat": 4.5 },
+          { "country": "Japan", "lon": 138.0, "lat": 36.0 },
+          { "country": "South Korea", "lon": 127.5, "lat": 36.5 },
+          { "country": "Bangladesh", "lon": 90.4, "lat": 23.7 },
+          { "country": "Nepal", "lon": 84.0, "lat": 28.0 },
+          { "country": "Sri Lanka", "lon": 80.7, "lat": 7.9 },
+          { "country": "Pakistan", "lon": 69.3, "lat": 30.4 },
+          { "country": "Myanmar", "lon": 96.1, "lat": 21.9 },
+          { "country": "Cambodia", "lon": 104.9, "lat": 12.5 },
+          { "country": "Laos", "lon": 102.5, "lat": 18.0 },
+          { "country": "Saudi Arabia", "lon": 46.1, "lat": 21.9 },
+          { "country": "Iran", "lon": 53.7, "lat": 32.0 },
+          { "country": "Netherlands", "lon": 5.3, "lat": 53.1 },
+          { "country": "Astana", "lon": 71.4, "lat": 51.2 },
+          { "country": "Kazakhstan", "lon": 66.9, "lat": 48.0 },
+          { "country": "Ethiopia", "lon": 39.7, "lat": 9.0 },
+          { "country": "Maldives", "lon": 73.2, "lat": 3.2 }
+        ]
+      },
+      "mark": { "type": "text", "color": "darkblue", "fontSize": 26, "fontWeight": "bold" },
+      "encoding": {
+        "longitude": { "field": "lon" },
+        "latitude": { "field": "lat" },
+        "text": { "field": "country" }
       }
     }
   ]
