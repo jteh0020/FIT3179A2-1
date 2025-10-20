@@ -30,7 +30,6 @@
 
   "transform": [
     { "filter": "isValid(datum.Year) && datum.Year == year_select" },
-
     {
       "calculate": "datum.City1 < datum.City2 ? datum.City1 + ' ↔ ' + datum.City2 : datum.City2 + ' ↔ ' + datum.City1",
       "as": "Route"
@@ -48,28 +47,90 @@
     { "filter": "datum.rank <= 10" }
   ],
 
-  "mark": { "type": "bar", "cornerRadiusEnd": 3, "color": "#006DAE" },
-
-  "encoding": {
-    "y": {
-      "field": "Route",
-      "type": "nominal",
-      "sort": "-x",
-      "title": "Route"
-    },
-    "x": {
-      "field": "Total_Trips",
-      "type": "quantitative",
-      "title": "Passenger Trips Per Month"
-    },
-    "tooltip": [
-      { "field": "Route", "type": "nominal", "title": "Route" },
-      {
-        "field": "Total_Trips",
-        "type": "quantitative",
-        "title": "Passenger Trips",
-        "format": ","
+  "layer": [
+    {
+      "mark": { "type": "bar", "cornerRadiusEnd": 3 },
+      "encoding": {
+        "y": {
+          "field": "Route",
+          "type": "nominal",
+          "sort": "-x",
+          "title": "Route"
+        },
+        "x": {
+          "field": "Total_Trips",
+          "type": "quantitative",
+          "title": "Passenger Trips Per Month"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.rank == 1",
+            "value": "#006DAE"
+          },
+          "value": "#006DAE"
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum.rank <= 3",
+            "value": 1
+          },
+          "value": 0.4
+        }
       }
-    ]
-  }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 5,
+        "fontSize": 12,
+        "color": "black"
+      },
+      "encoding": {
+        "y": { "field": "Route", "type": "nominal", "sort": "-x" },
+        "x": { "field": "Total_Trips", "type": "quantitative" },
+        "text": {
+          "field": "Total_Trips",
+          "type": "quantitative",
+          "format": ","
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "red",
+        "strokeDash": [5, 5],
+        "size": 2
+      },
+      "encoding": {
+        "x": {
+          "aggregate": "median",
+          "field": "Total_Trips",
+          "type": "quantitative",
+          "title": "Median Passenger Trips"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "color": "red",
+        "dx": 5,
+        "dy": -10,
+        "fontSize": 12,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "x": { "aggregate": "median", "field": "Total_Trips" },
+        "text": {
+          "aggregate": "median",
+          "field": "Total_Trips",
+          "format": ",",
+          "title": "Median Passenger Trips"
+        }
+      }
+    }
+  ]
 }

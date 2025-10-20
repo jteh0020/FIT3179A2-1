@@ -27,14 +27,11 @@
       ],
       "as": ["Year", "Value"]
     },
-    {
-      "calculate": "toNumber(datum.Value)",
-      "as": "ValueNum"
-    }
+    {"calculate": "toNumber(datum.Value)", "as": "ValueNum"}
   ],
   "mark": {
     "type": "line",
-    "point": true,
+    "point": {"filled": true, "size": 50},
     "strokeWidth": 3
   },
   "encoding": {
@@ -42,18 +39,27 @@
       "field": "Year",
       "type": "ordinal",
       "title": "Year",
-      "axis": {"labelAngle": 0}
+      "axis": {"labelAngle": 0, "labelFontSize": 12, "titleFontSize": 13}
     },
     "y": {
       "field": "ValueNum",
       "type": "quantitative",
-      "title": "Number of Aircraft / Passengers"
+      "title": "Number of Aircraft in Fleet",
+      "axis": {"labelFontSize": 12, "titleFontSize": 13}
     },
     "color": {
       "field": "NAME",
       "type": "nominal",
       "title": "Airline",
-      "scale": {"scheme": "tableau10"}
+      "scale": {"scheme": "tableau10"},
+      "legend": {
+        "orient": "bottom",
+        "columns": 1,                
+        "title": null,
+        "labelFontSize": 12,
+        "symbolSize": 120,
+        "symbolType": "circle"
+      }
     },
     "tooltip": [
       {"field": "NAME", "title": "Airline"},
@@ -62,7 +68,6 @@
     ]
   },
   "config": {
-    "legend": {"orient": "bottom", "title": null},
     "view": {"stroke": "transparent"},
     "axis": {"labelFontSize": 12, "titleFontSize": 13}
   }

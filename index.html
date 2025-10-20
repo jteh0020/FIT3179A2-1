@@ -19,7 +19,7 @@
       --primary: #005b96;
       --accent: #1b98e0;
       --bg: #f8f9fa;
-      --text: #333;
+      --text: #222;
     }
 
     body {
@@ -28,6 +28,8 @@
       color: var(--text);
       margin: 0;
       scroll-behavior: smooth;
+      font-size: 20px; /* Increased from ~16px */
+      line-height: 1.8;
     }
 
     header {
@@ -45,14 +47,16 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 1.5rem;
+      padding: 1.2rem 1.5rem;
+      font-size: 22px;
     }
 
     nav a {
       color: #fff;
       text-decoration: none;
-      margin-left: 1.2rem;
-      font-weight: 500;
+      margin-left: 1.5rem;
+      font-weight: 600;
+      font-size: 20px;
     }
 
     nav a:hover {
@@ -68,57 +72,116 @@
     h1, h2 {
       color: var(--primary);
       text-align: center;
+      line-height: 1.4;
     }
 
     h1 {
+      font-size: 36px;
       margin-bottom: 0.5rem;
     }
 
+    h2 {
+      font-size: 30px;
+      margin-bottom: 1rem;
+    }
+
     p {
-      line-height: 1.6;
+      font-size: 20px;
+      line-height: 1.8;
       text-align: justify;
+      margin-bottom: 1.2rem;
     }
 
     section.card {
       background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      padding: 2rem;
+      border-radius: 14px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+      padding: 2.2rem;
       margin-bottom: 2rem;
     }
 
     .chart-container {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
     }
 
     footer {
       text-align: center;
-      padding: 2rem 1rem;
-      color: #777;
-      font-size: 0.9em;
+      padding: 2.5rem 1rem;
+      color: #666;
+      font-size: 18px;
     }
 
     .city-table {
       border-collapse: collapse;
       margin: 1rem auto;
       width: 90%;
-      font-size: 0.95em;
+      font-size: 18px;
     }
 
     .city-table th, .city-table td {
       border: 1px solid #ddd;
-      padding: 8px 10px;
+      padding: 10px 12px;
       text-align: center;
     }
 
     .city-table th {
       background-color: var(--accent);
       color: #fff;
+      font-size: 20px;
     }
 
     .city-table td:first-child {
       font-weight: bold;
       background: #f1faff;
+    }
+
+    /* === Expanded Chart Styling === */
+    #stacked_bar_chart,
+    #line_chart {
+      width: 100%;
+      max-width: 1000px;
+      min-height: 600px;
+      margin: 40px auto;
+      display: block;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      background-color: #fafafa;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    #stacked_bar_chart text,
+    #line_chart text {
+      font-size: 18px !important;
+      font-family: 'Inter', sans-serif !important;
+    }
+
+    #stacked_bar_chart .role-title,
+    #line_chart .role-title {
+      font-size: 22px !important;
+      font-weight: 700 !important;
+    }
+
+    #stacked_bar_chart .role-axis-title,
+    #line_chart .role-axis-title {
+      font-size: 20px !important;
+      font-weight: 600 !important;
+    }
+
+    #stacked_bar_chart .role-axis-label,
+    #line_chart .role-axis-label {
+      font-size: 18px !important;
+    }
+
+    #stacked_bar_chart .role-legend-title,
+    #line_chart .role-legend-title {
+      font-size: 19px !important;
+      font-weight: 600 !important;
+    }
+
+    #stacked_bar_chart .role-legend-label,
+    #line_chart .role-legend-label {
+      font-size: 17px !important;
     }
   </style>
 </head>
@@ -139,19 +202,23 @@
     <section class="card" id="intro">
       <h1>Air Travel in Malaysia</h1>
       <p>
-        This interactive dashboard provides a visual overview of <strong>air travel patterns in Malaysia</strong>, 
-        focusing on both <strong>domestic</strong> and <strong>international</strong> flight routes. 
-        Explore how Malaysia’s airports connect regions across the country and around the world, 
-        highlighting key hubs and travel trends over time.
+        This interactive dashboard offers an overview of
+        <strong>Malaysia’s air travel network</strong>. 
+        Explore how both <strong>domestic</strong> and 
+        <strong>international</strong> routes connect regions, 
+        revealing the key hubs and trends shaping 
+        national and global air movement.
       </p>
     </section>
 
     <section class="card" id="domestic-map">
       <h2>Domestic Air Travel in Malaysia</h2>
       <p>
-        The map below illustrates <strong>domestic flight connections</strong> between Malaysian airports. 
-        Each dot or line represents a route — denser networks indicate higher traffic volumes. 
-        Major domestic hubs include <em>Kuala Lumpur (KUL)</em>, <em>Kota Kinabalu (BKI)</em>, and <em>Penang (PEN)</em>.
+        The map shows <strong>domestic flight routes</strong>
+        linking airports across Malaysia. Denser lines 
+        indicate higher traffic volumes — with hubs such as 
+        <em>Kuala Lumpur (KUL)</em>, <em>Kota Kinabalu (BKI)</em>, 
+        and <em>Penang (PEN)</em> leading activity.
       </p>
       <div class="chart-container" id="dot_map"></div>
     </section>
@@ -159,7 +226,8 @@
     <section class="card">
       <h2>Top 10 Busiest Domestic Routes</h2>
       <p>
-        This bar chart presents the ten most heavily trafficked domestic routes, measured by flight frequency or passenger volume.
+        This bar chart displays the <strong>most popular domestic routes</strong> 
+        ranked by passenger volume or flight frequency.
       </p>
       <div class="chart-container" id="bar_vis"></div>
     </section>
@@ -167,41 +235,19 @@
     <section class="card" id="international-map">
       <h2>International Air Travel in Malaysia</h2>
       <p>
-        The map below displays Malaysia’s <strong>international air travel network</strong>. 
-        Lines extend from Malaysian airports to major global destinations, highlighting 
-        Malaysia’s role as a <strong>regional aviation hub</strong> in Southeast Asia.
+        The map highlights Malaysia’s <strong>international air connections</strong>. 
+        Routes extend from local airports to global destinations — 
+        illustrating Malaysia’s role as a <strong>regional aviation hub</strong>.
       </p>
       <div class="chart-container" id="dot_map1"></div>
-
-      <h3 style="text-align:center; margin-top:2rem;">Connected Cities by Country</h3>
-      <table class="city-table">
-        <thead>
-          <tr>
-            <th>Country</th>
-            <th>Cities with Direct Flights to Malaysia</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Singapore</td><td>Singapore</td></tr>
-          <tr><td>Thailand</td><td>Bangkok, Phuket, Hat Yai, Krabi</td></tr>
-          <tr><td>Indonesia</td><td>Jakarta, Medan, Surabaya, Bali (Denpasar)</td></tr>
-          <tr><td>China</td><td>Beijing, Shanghai, Guangzhou, Shenzhen, Xiamen</td></tr>
-          <tr><td>Australia</td><td>Sydney, Melbourne, Perth</td></tr>
-          <tr><td>Vietnam</td><td>Ho Chi Minh City, Hanoi</td></tr>
-          <tr><td>Philippines</td><td>Manila</td></tr>
-          <tr><td>Japan</td><td>Tokyo, Osaka</td></tr>
-          <tr><td>South Korea</td><td>Seoul</td></tr>
-          <tr><td>India</td><td>New Delhi, Chennai, Bengaluru</td></tr>
-        </tbody>
-      </table>
     </section>
 
     <section class="card">
       <h2>Top 10 Busiest International Routes</h2>
       <p>
-        The bar chart below highlights Malaysia’s busiest international flight connections.
-        These routes link Malaysia to major cities such as Singapore, Bangkok, and Jakarta — 
-        reflecting strong economic and tourism relationships across the region.
+        The bar chart below shows Malaysia’s <strong>busiest global connections</strong>, 
+        linking to cities such as <em>Singapore</em>, <em>Bangkok</em>, 
+        and <em>Jakarta</em> — reflecting key economic and tourism links.
       </p>
       <div class="chart-container" id="bar_vis1"></div>
     </section>
@@ -209,8 +255,10 @@
     <section class="card" id="airport-trends">
       <h2>Passenger Movement by Major Malaysian Airports (2017–2024)</h2>
       <p>
-        This stacked bar chart shows passenger traffic trends at major Malaysian airports. 
-        It highlights how international recovery post-pandemic affected traffic in key hubs.
+        This stacked bar chart visualizes <strong>passenger traffic trends</strong> 
+        at major Malaysian airports. It highlights the post-pandemic 
+        recovery and traffic shifts across <em>KUL</em>, <em>PEN</em>, 
+        and <em>BKI</em>.
       </p>
       <div class="chart-container" id="stacked_bar_chart"></div>
     </section>
@@ -218,17 +266,18 @@
     <section class="card">
       <h2>Malaysian Carrier Fleet Size</h2>
       <p>
-        The line chart below illustrates the fleet size of major Malaysian carriers over time — 
-        offering insight into industry growth and capacity expansion trends.
+        The line chart shows how the <strong>fleet size</strong> 
+        of major Malaysian airlines evolved — indicating 
+        <strong>industry growth and capacity expansion</strong> over time.
       </p>
       <div class="chart-container" id="line_chart"></div>
     </section>
 
     <footer>
       <p>
-        Data sources: <em>Malaysia Airports, OpenSky Network</em><br>
-        Visualisation created with <a href="https://vega.github.io/" target="_blank">Vega-Lite</a> |
-        Designed by <strong>Your Name</strong>
+        Data sources: <em>Kaggle, Ministry of Transport, Planespotters.net</em><br>
+        Visualization made with <a href="https://vega.github.io/" target="_blank">Vega-Lite</a> |
+        Designed by <strong>Jteh0020</strong>
       </p>
     </footer>
   </main>

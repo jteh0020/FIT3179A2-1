@@ -1,0 +1,26 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Malaysian Carrier Fleet Size by Category (Pie Chart)",
+  "data": {
+    "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/aircraft_type.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.Year == 2025"  // Change this to another year if needed
+    }
+  ],
+  "mark": {"type": "arc", "tooltip": true},
+  "encoding": {
+    "theta": {"field": "Count", "type": "quantitative"},
+    "color": {
+      "field": "Category",
+      "type": "nominal",
+      "scale": {"scheme": "category10"}
+    },
+    "tooltip": [
+      {"field": "Category", "type": "nominal", "title": "Category"},
+      {"field": "Count", "type": "quantitative", "title": "Fleet Size"}
+    ]
+  },
+  "view": {"stroke": null}
+}

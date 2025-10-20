@@ -9,8 +9,11 @@
   },
   "width": 3000,
   "height": 2000,
-  "projection": { "type": "mercator", "scale": 900, "center": [84, 10] },
-
+  "projection": {
+    "type": "mercator",
+    "scale": 900,
+    "center": [84, 10]
+  },
   "params": [
     {
       "name": "year_select",
@@ -18,7 +21,7 @@
       "bind": {
         "input": "range",
         "min": 2017,
-        "max": 2025,
+        "max": 2024,
         "step": 1,
         "name": "Select Year: "
       }
@@ -30,38 +33,74 @@
         "input": "select",
         "options": [
           "All",
-          "China",
-          "Malaysia",
-          "Thailand",
-          "Singapore",
-          "Vietnam",
-          "Indonesia",
-          "Philippines",
-          "Japan",
-          "South Korea",
-          "India",
           "Australia",
+          "Bangladesh",
+          "Brunei Darussalam",
+          "Cambodia",
+          "China",
+          "Ethiopia",
+          "France",
+          "Germany",
+          "Hong Kong",
+          "India",
+          "Indonesia",
+          "Iran",
+          "Iraq",
+          "Japan",
+          "Jordan",
+          "Kazakhstan",
+          "Kuwait",
+          "Laos",
+          "Macao",
+          "Malaysia",
+          "Maldives",
+          "Mauritius",
+          "Myanmar",
+          "Nepal",
+          "Netherlands",
+          "New Zealand",
+          "Oman",
+          "Pakistan",
+          "Philippines",
+          "Qatar",
+          "Saudi Arabia",
+          "Singapore",
+          "South Korea",
+          "Sri Lanka",
+          "Taiwan",
+          "Thailand",
+          "Türkiye",
+          "United Arab Emirates",
           "United Kingdom",
-          "United Arab Emirates"
+          "Uzbekistan",
+          "Vietnam"
         ],
         "name": "Filter by Country: "
       }
     }
   ],
-
   "layer": [
     {
       "data": { "graticule": { "step": [20, 20] } },
-      "mark": { "type": "geoshape", "stroke": "#ccc", "strokeDash": [2, 2], "opacity": 0.8 }
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#ccc",
+        "strokeDash": [2, 2],
+        "opacity": 0.8
+      }
     },
     {
       "data": {
         "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/js/map3.json",
         "format": { "type": "topojson", "feature": "asiaeu" }
       },
-      "mark": { "type": "geoshape", "fill": "#f0f0f0", "stroke": "#333", "strokeWidth": 0.9 }
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f0f0f0",
+        "stroke": "#333",
+        "strokeWidth": 0.9
+      }
     },
-
     {
       "data": {
         "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
@@ -69,9 +108,16 @@
       },
       "transform": [
         { "filter": "datum.Year == year_select" },
-        { "filter": "(country_select == 'All') || (datum.Country1 == country_select) || (datum.Country2 == country_select)" }
+        {
+          "filter": "(country_select == 'All') || (datum.Country1 == country_select) || (datum.Country2 == country_select)"
+        }
       ],
-      "mark": { "type": "rule", "stroke": "steelblue", "strokeWidth": 1.2, "opacity": 0.4 },
+      "mark": {
+        "type": "rule",
+        "stroke": "steelblue",
+        "strokeWidth": 1.2,
+        "opacity": 0.4
+      },
       "encoding": {
         "longitude": { "field": "Long1" },
         "latitude": { "field": "Lat1" },
@@ -87,7 +133,6 @@
         ]
       }
     },
-
     {
       "data": {
         "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
@@ -95,8 +140,12 @@
       },
       "transform": [
         { "filter": "datum.Year == year_select" },
-        { "filter": "(country_select == 'All') || (datum.Country1 == country_select) || (datum.Country2 == country_select)" },
-        { "filter": "indexof(['Kuala Lumpur','Penang','Kota Kinabalu','Langkawi','Kuching','Subang','Johor Bahru'], datum.City1) >= 0" }
+        {
+          "filter": "(country_select == 'All') || (datum.Country1 == country_select) || (datum.Country2 == country_select)"
+        },
+        {
+          "filter": "indexof(['Kuala Lumpur','Penang','Kota Kinabalu','Langkawi','Kuching','Subang','Johor Bahru'], datum.City1) >= 0"
+        }
       ],
       "mark": { "type": "circle", "color": "red", "size": 150, "opacity": 0.9 },
       "encoding": {
@@ -105,7 +154,6 @@
         "tooltip": [{ "field": "City1", "title": "Origin Airport" }]
       }
     },
-
     {
       "data": {
         "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
@@ -113,8 +161,12 @@
       },
       "transform": [
         { "filter": "datum.Year == year_select" },
-        { "filter": "(country_select == 'All') || (datum.Country1 == country_select) || (datum.Country2 == country_select)" },
-        { "filter": "indexof(['Kuala Lumpur','Penang','Kota Kinabalu','Langkawi','Kuching','Subang','Johor Bahru'], datum.City2) < 0" }
+        {
+          "filter": "(country_select == 'All') || (datum.Country1 == country_select) || (datum.Country2 == country_select)"
+        },
+        {
+          "filter": "indexof(['Kuala Lumpur','Penang','Kota Kinabalu','Langkawi','Kuching','Subang','Johor Bahru'], datum.City2) < 0"
+        }
       ],
       "mark": { "type": "circle", "color": "#1f77b4", "size": 300, "opacity": 0.9 },
       "encoding": {
@@ -123,47 +175,58 @@
         "tooltip": [{ "field": "City2", "title": "Destination Airport" }]
       }
     },
-
     {
       "data": {
         "values": [
-          { "country": "Malaysia", "lon": 101.7, "lat": 3.1 },
-          { "country": "China", "lon": 104.0, "lat": 35.0 },
-          { "country": "India", "lon": 78.0, "lat": 22.0 },
           { "country": "Australia", "lon": 134.0, "lat": -25.0 },
-          { "country": "New Zealand", "lon": 172.0, "lat": -39.0 },
-          { "country": "United Kingdom", "lon": -1.5, "lat": 52.0 },
+          { "country": "Bangladesh", "lon": 90.4, "lat": 23.7 },
+          { "country": "Brunei Darussalam", "lon": 114.5, "lat": 4.5 },
+          { "country": "Cambodia", "lon": 104.9, "lat": 12.5 },
+          { "country": "China", "lon": 104.0, "lat": 35.0 },
+          { "country": "Ethiopia", "lon": 39.7, "lat": 9.0 },
           { "country": "France", "lon": 2.2, "lat": 46.5 },
           { "country": "Germany", "lon": 10.5, "lat": 51.0 },
-          { "country": "United Arab Emirates", "lon": 54.4, "lat": 24.5 },
-          { "country": "Qatar", "lon": 50.2, "lat": 26.3 },
-          { "country": "Oman", "lon": 57.5, "lat": 21.0 },
-          { "country": "Türkiye", "lon": 35.2, "lat": 39.0 },
-          { "country": "Singapore", "lon": 103.8, "lat": 1.3 },
-          { "country": "Thailand", "lon": 100.5, "lat": 13.7 },
-          { "country": "Vietnam", "lon": 106.7, "lat": 16.0 },
+          { "country": "Hong Kong", "lon": 114.2, "lat": 25.3 },
+          { "country": "India", "lon": 78.0, "lat": 22.0 },
           { "country": "Indonesia", "lon": 120.0, "lat": -2.0 },
-          { "country": "Philippines", "lon": 122.0, "lat": 12.0 },
-          { "country": "Brunei Darussalam", "lon": 114.5, "lat": 4.5 },
-          { "country": "Japan", "lon": 138.0, "lat": 36.0 },
-          { "country": "South Korea", "lon": 127.5, "lat": 36.5 },
-          { "country": "Bangladesh", "lon": 90.4, "lat": 23.7 },
-          { "country": "Nepal", "lon": 84.0, "lat": 28.0 },
-          { "country": "Sri Lanka", "lon": 80.7, "lat": 7.9 },
-          { "country": "Pakistan", "lon": 69.3, "lat": 30.4 },
-          { "country": "Myanmar", "lon": 96.1, "lat": 21.9 },
-          { "country": "Cambodia", "lon": 104.9, "lat": 12.5 },
-          { "country": "Laos", "lon": 102.5, "lat": 18.0 },
-          { "country": "Saudi Arabia", "lon": 46.1, "lat": 21.9 },
           { "country": "Iran", "lon": 53.7, "lat": 32.0 },
-          { "country": "Netherlands", "lon": 5.3, "lat": 53.1 },
-          { "country": "Astana", "lon": 71.4, "lat": 51.2 },
+          { "country": "Iraq", "lon": 44.4, "lat": 33.3 },
+          { "country": "Japan", "lon": 138.0, "lat": 36.0 },
+          { "country": "Jordan", "lon": 36.3, "lat": 31.3 },
           { "country": "Kazakhstan", "lon": 66.9, "lat": 48.0 },
-          { "country": "Ethiopia", "lon": 39.7, "lat": 9.0 },
-          { "country": "Maldives", "lon": 73.2, "lat": 3.2 }
+          { "country": "Kuwait", "lon": 47.5, "lat": 29.3 },
+          { "country": "Laos", "lon": 102.5, "lat": 18.0 },
+          { "country": "Macao", "lon": 113.5, "lat": 22.2 },
+          { "country": "Malaysia", "lon": 101.7, "lat": 3.1 },
+          { "country": "Maldives", "lon": 73.2, "lat": 3.2 },
+          { "country": "Mauritius", "lon": 57.5, "lat": -20.2 },
+          { "country": "Myanmar", "lon": 96.1, "lat": 21.9 },
+          { "country": "Nepal", "lon": 84.0, "lat": 28.0 },
+          { "country": "Netherlands", "lon": 5.3, "lat": 53.1 },
+          { "country": "New Zealand", "lon": 172.0, "lat": -39.0 },
+          { "country": "Oman", "lon": 57.5, "lat": 21.0 },
+          { "country": "Pakistan", "lon": 69.3, "lat": 30.4 },
+          { "country": "Philippines", "lon": 122.0, "lat": 12.0 },
+          { "country": "Qatar", "lon": 51.2, "lat": 25.3 },
+          { "country": "Saudi Arabia", "lon": 46.1, "lat": 21.9 },
+          { "country": "Singapore", "lon": 103.8, "lat": 1.3 },
+          { "country": "South Korea", "lon": 127.5, "lat": 36.5 },
+          { "country": "Sri Lanka", "lon": 80.7, "lat": 7.9 },
+          { "country": "Taiwan", "lon": 120.9, "lat": 23.7 },
+          { "country": "Thailand", "lon": 100.5, "lat": 13.7 },
+          { "country": "Türkiye", "lon": 35.2, "lat": 39.0 },
+          { "country": "United Arab Emirates", "lon": 54.4, "lat": 24.5 },
+          { "country": "United Kingdom", "lon": -1.5, "lat": 52.0 },
+          { "country": "Uzbekistan", "lon": 64.6, "lat": 41.4 },
+          { "country": "Vietnam", "lon": 106.7, "lat": 16.0 }
         ]
       },
-      "mark": { "type": "text", "color": "darkblue", "fontSize": 26, "fontWeight": "bold" },
+      "mark": {
+        "type": "text",
+        "color": "darkblue",
+        "fontSize": 26,
+        "fontWeight": "bold"
+      },
       "encoding": {
         "longitude": { "field": "lon" },
         "latitude": { "field": "lat" },
