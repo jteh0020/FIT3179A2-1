@@ -3,35 +3,31 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Air Travel in Malaysia</title>
+  <title>Air Travel in Malaysia – Storytelling Dashboard</title>
 
   <!-- Vega & Vega-Lite libraries -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
-  <!-- External stylesheet -->
+  <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css">
-
   <style>
-    /* ===== Base styling ===== */
     :root {
       --primary: #005b96;
       --accent: #1b98e0;
       --bg: #f8f9fa;
       --text: #222;
     }
-
     body {
       font-family: "Inter", "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
       margin: 0;
-      scroll-behavior: smooth;
-      font-size: 20px; /* Increased from ~16px */
+      font-size: 20px;
       line-height: 1.8;
+      scroll-behavior: smooth;
     }
-
     header {
       background: var(--primary);
       color: #fff;
@@ -40,7 +36,6 @@
       z-index: 10;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-
     .header-inner {
       max-width: 1100px;
       margin: 0 auto;
@@ -50,7 +45,6 @@
       padding: 1.2rem 1.5rem;
       font-size: 22px;
     }
-
     nav a {
       color: #fff;
       text-decoration: none;
@@ -58,40 +52,16 @@
       font-weight: 600;
       font-size: 20px;
     }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
+    nav a:hover { text-decoration: underline; }
     main {
       max-width: 1100px;
       margin: 2rem auto;
       padding: 0 1.5rem;
     }
-
     h1, h2 {
       color: var(--primary);
       text-align: center;
-      line-height: 1.4;
     }
-
-    h1 {
-      font-size: 36px;
-      margin-bottom: 0.5rem;
-    }
-
-    h2 {
-      font-size: 30px;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 20px;
-      line-height: 1.8;
-      text-align: justify;
-      margin-bottom: 1.2rem;
-    }
-
     section.card {
       background: #fff;
       border-radius: 14px;
@@ -99,197 +69,162 @@
       padding: 2.2rem;
       margin-bottom: 2rem;
     }
-
-    .chart-container {
-      margin-top: 1.5rem;
-    }
-
     footer {
       text-align: center;
       padding: 2.5rem 1rem;
       color: #666;
       font-size: 18px;
     }
-
-    .city-table {
-      border-collapse: collapse;
-      margin: 1rem auto;
-      width: 90%;
-      font-size: 18px;
-    }
-
-    .city-table th, .city-table td {
-      border: 1px solid #ddd;
-      padding: 10px 12px;
-      text-align: center;
-    }
-
-    .city-table th {
-      background-color: var(--accent);
-      color: #fff;
-      font-size: 20px;
-    }
-
-    .city-table td:first-child {
-      font-weight: bold;
-      background: #f1faff;
-    }
-
-    /* === Expanded Chart Styling === */
-    #stacked_bar_chart,
-    #line_chart {
-      width: 100%;
-      max-width: 1000px;
-      min-height: 600px;
-      margin: 40px auto;
-      display: block;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      background-color: #fafafa;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    #stacked_bar_chart text,
-    #line_chart text {
-      font-size: 18px !important;
-      font-family: 'Inter', sans-serif !important;
-    }
-
-    #stacked_bar_chart .role-title,
-    #line_chart .role-title {
-      font-size: 22px !important;
-      font-weight: 700 !important;
-    }
-
-    #stacked_bar_chart .role-axis-title,
-    #line_chart .role-axis-title {
-      font-size: 20px !important;
-      font-weight: 600 !important;
-    }
-
-    #stacked_bar_chart .role-axis-label,
-    #line_chart .role-axis-label {
-      font-size: 18px !important;
-    }
-
-    #stacked_bar_chart .role-legend-title,
-    #line_chart .role-legend-title {
-      font-size: 19px !important;
-      font-weight: 600 !important;
-    }
-
-    #stacked_bar_chart .role-legend-label,
-    #line_chart .role-legend-label {
-      font-size: 17px !important;
-    }
   </style>
 </head>
 
 <body>
-  <header role="banner">
+  <header>
     <div class="header-inner">
       <h2>✈️ Air Travel in Malaysia</h2>
-      <nav aria-label="Main navigation">
-        <a href="#domestic-map">Domestic</a>
-        <a href="#international-map">International</a>
-        <a href="#airport-trends">Trends</a>
+      <nav>
+        <a href="#domestic">Domestic</a>
+        <a href="#international">International</a>
+        <a href="#airports">Airports</a>
+        <a href="#fleet">Fleet</a>
       </nav>
     </div>
   </header>
 
   <main>
+    <!-- Introduction -->
     <section class="card" id="intro">
-      <h1>Air Travel in Malaysia</h1>
+      <h1>Exploring Malaysia’s Air Travel Landscape</h1>
       <p>
-        This interactive dashboard offers an overview of
-        <strong>Malaysia’s air travel network</strong>. 
-        Explore how both <strong>domestic</strong> and 
-        <strong>international</strong> routes connect regions, 
-        revealing the key hubs and trends shaping 
-        national and global air movement.
+        This interactive dashboard explores Malaysia’s <strong>aviation ecosystem</strong> — 
+        from domestic routes that connect regions across the peninsula and Borneo, 
+        to international networks linking Malaysia with the world. 
+        The story concludes with a look at airport performance and airline fleet evolution, 
+        uncovering how the industry has adapted and recovered from the pandemic years.
       </p>
     </section>
 
-    <section class="card" id="domestic-map">
-      <h2>Domestic Air Travel in Malaysia</h2>
+    <!-- 1. Domestic Insight -->
+    <section class="card" id="domestic">
+      <h2>1. Domestic Flight Insight</h2>
       <p>
-        The map shows <strong>domestic flight routes</strong>
-        linking airports across Malaysia. Denser lines 
-        indicate higher traffic volumes — with hubs such as 
+        Malaysia’s domestic network forms the backbone of national mobility. 
+        The visualizations below show how airports such as 
         <em>Kuala Lumpur (KUL)</em>, <em>Kota Kinabalu (BKI)</em>, 
-        and <em>Penang (PEN)</em> leading activity.
+        and <em>Penang (PEN)</em> anchor the country’s air routes.
       </p>
-      <div class="chart-container" id="dot_map"></div>
+      <div id="dot_map"></div>
+      <p>
+        The map above highlights all <strong>domestic routes</strong>, 
+        while the bar chart below ranks the <strong>top 10 busiest routes</strong> 
+        based on passenger or flight volume.
+      </p>
+      <div id="bar_vis"></div>
     </section>
 
-    <section class="card">
-      <h2>Top 10 Busiest Domestic Routes</h2>
+    <!-- 2. International Insight -->
+    <section class="card" id="international">
+      <h2>2. International Flight Insight</h2>
       <p>
-        This bar chart displays the <strong>most popular domestic routes</strong> 
-        ranked by passenger volume or flight frequency.
+        Malaysia serves as a <strong>key aviation hub in Southeast Asia</strong>. 
+        The international route map visualizes flight paths that connect 
+        Kuala Lumpur and other airports to major cities around the world.
       </p>
-      <div class="chart-container" id="bar_vis"></div>
+      <div id="dot_map1"></div>
+      <p>
+        Below, the bar chart identifies the <strong>top 10 international routes</strong>, 
+        revealing Malaysia’s strongest air links to destinations such as 
+        <em>Singapore</em>, <em>Bangkok</em>, <em>Jakarta</em>, and <em>Ho Chi Minh</em>.
+      </p>
+      <div id="bar_vis1"></div>
     </section>
 
-    <section class="card" id="international-map">
-      <h2>International Air Travel in Malaysia</h2>
+    <!-- 3. Airport Performance -->
+    <section class="card" id="airports">
+      <h2>3.1 Malaysian Airport Performance</h2>
       <p>
-        The map highlights Malaysia’s <strong>international air connections</strong>. 
-        Routes extend from local airports to global destinations — 
-        illustrating Malaysia’s role as a <strong>regional aviation hub</strong>.
+        Airports are the pulse of Malaysia’s air connectivity. 
+        This visualization compares <strong>passenger movement</strong> 
+        across major airports from 2017 to 2024, 
+        showing how each facility contributes to the national aviation network.
       </p>
-      <div class="chart-container" id="dot_map1"></div>
+      <div id="stacked_bar_chart"></div>
+      <p>
+        <strong>Kuala Lumpur International Airport (KUL)</strong> remains dominant, 
+        followed by <em>Kota Kinabalu</em>, <em>Penang</em>, and <em>Kuching</em>. 
+        Smaller regional airports support crucial domestic links, 
+        ensuring balanced connectivity throughout the country.
+      </p>
+    <!-- 3.5 Aircraft Movement Trends -->
+    <section class="card" id="movement">
+      <h2>3.2 Aircraft Movement Trends (2017–2024)</h2>
+      <p>
+        Aircraft movement data provides another lens into airport performance — reflecting both 
+        <strong>flight frequency</strong> and operational activity levels across Malaysia’s airports. 
+        This visualization highlights how <em>KLIA</em>, <em>KLIA2</em>, and <em>Penang</em> 
+        consistently led in movement volume, with evident dips during the pandemic and recovery in later years.
+      </p>
+      <div id="aircraft_movement_chart"></div>
+      <p>
+        The chart captures annual <strong>takeoffs and landings</strong> for each airport, 
+        illustrating resilience and recovery trends across Malaysia’s aviation network.
+      </p>
+    </section>
     </section>
 
-    <section class="card">
-      <h2>Top 10 Busiest International Routes</h2>
+    <!-- 4. Fleet Performance -->
+    <section class="card" id="fleet">
+      <h2>4. Fleet Performance and Utilisation</h2>
       <p>
-        The bar chart below shows Malaysia’s <strong>busiest global connections</strong>, 
-        linking to cities such as <em>Singapore</em>, <em>Bangkok</em>, 
-        and <em>Jakarta</em> — reflecting key economic and tourism links.
+        The final section focuses on Malaysia’s <strong>airline fleet size</strong>, 
+        providing insight into capacity growth and industry recovery between 2017–2024. 
+        It reflects how carriers like <em>AirAsia</em>, <em>Malaysia Airlines</em>, 
+        and <em>Batik Air</em> adjusted operations to meet changing demand.
       </p>
-      <div class="chart-container" id="bar_vis1"></div>
+      <div id="line_chart"></div>
+      <p>
+        Airlines demonstrate steady recovery post-2021, 
+        with low-cost carriers expanding rapidly to meet renewed passenger demand.
+      </p>
+    </section>
+    <!-- 4.1 Fleet Composition by Aircraft Type -->
+    <section class="card" id="fleet_composition">
+      <h2>4.1 Fleet Composition by Aircraft Type</h2>
+      <p>
+        This interactive pie chart shows Malaysia’s <strong>fleet composition</strong> 
+        by aircraft type across the years 2017–2025. Use the slider to explore 
+        how <em>Narrow Body</em>, <em>Wide Body</em>, and <em>Regional Jet</em> 
+        proportions evolved as airlines adapted their operations post-pandemic.
+      </p>
+      <div id="fleet_pie_chart"></div>
+      <p>
+        In recent years, <strong>Narrow Body</strong> aircraft dominate the Malaysian fleet, 
+        reflecting growing demand for <em>short-to-medium haul</em> regional routes, 
+        while <em>Wide Body</em> and <em>Regional Jet</em> numbers fluctuate in line 
+        with international and domestic service recovery.
+      </p>
     </section>
 
-    <section class="card" id="airport-trends">
-      <h2>Passenger Movement by Major Malaysian Airports (2017–2024)</h2>
-      <p>
-        This stacked bar chart visualizes <strong>passenger traffic trends</strong> 
-        at major Malaysian airports. It highlights the post-pandemic 
-        recovery and traffic shifts across <em>KUL</em>, <em>PEN</em>, 
-        and <em>BKI</em>.
-      </p>
-      <div class="chart-container" id="stacked_bar_chart"></div>
-    </section>
-
-    <section class="card">
-      <h2>Malaysian Carrier Fleet Size</h2>
-      <p>
-        The line chart shows how the <strong>fleet size</strong> 
-        of major Malaysian airlines evolved — indicating 
-        <strong>industry growth and capacity expansion</strong> over time.
-      </p>
-      <div class="chart-container" id="line_chart"></div>
-    </section>
 
     <footer>
       <p>
-        Data sources: <em>Kaggle, Ministry of Transport, Planespotters.net</em><br>
-        Visualization made with <a href="https://vega.github.io/" target="_blank">Vega-Lite</a> |
-        Designed by <strong>Jteh0020</strong>
+        Data sources: <em>Kaggle, Ministry of Transport Malaysia, Planespotters.net</em><br>
+        Visualisations built with <a href="https://vega.github.io/" target="_blank">Vega-Lite</a> |
+        Dashboard designed by <strong>Jteh0020</strong>
       </p>
     </footer>
   </main>
 
-  <!-- Vega-Lite Embeds -->
+  <!-- Vega Embeds -->
   <script>
     vegaEmbed('#dot_map', 'js/domestic_routes.vg.json', { actions: false, renderer: "svg" });
     vegaEmbed('#bar_vis', 'js/domestic_stats.vg.json', { actions: false, renderer: "svg" });
     vegaEmbed('#dot_map1', 'js/international_routes.vg.json', { actions: false, renderer: "svg" });
     vegaEmbed('#bar_vis1', 'js/international_stats.vg.json', { actions: false, renderer: "svg" });
     vegaEmbed('#stacked_bar_chart', 'js/stacked_bar_chart.vg.json', { actions: false, renderer: "svg" });
+    vegaEmbed('#aircraft_movement_chart', 'js/aircraft_movement.vg.json', { actions: false, renderer: "svg" });
     vegaEmbed('#line_chart', 'js/fleet_size.vg.json', { actions: false, renderer: "svg" });
+    vegaEmbed('#fleet_pie_chart', 'js/fleet_pie.vg.json', { actions: false, renderer: "svg" });
   </script>
 </body>
 </html>

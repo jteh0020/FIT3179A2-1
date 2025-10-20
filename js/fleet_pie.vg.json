@@ -1,0 +1,93 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Malaysian Airlines Fleet Composition by Type (2017–2025)",
+    "fontSize": 18,
+    "fontWeight": "bold",
+    "anchor": "middle"
+  },
+  "width": 450,
+  "height": 450,
+  "autosize": {"type": "fit", "contains": "padding"},
+  "data": {
+    "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/aircraft_type.csv",
+    "format": {"type": "csv"}
+  },
+  "params": [
+    {
+      "name": "year_select",
+      "value": 2024,
+      "bind": {
+        "input": "range",
+        "min": 2017,
+        "max": 2024,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    }
+  ],
+  "transform": [
+    {"calculate": "toNumber(datum.Year)", "as": "YearNum"},
+    {"filter": "datum.YearNum == year_select"},
+    {
+      "window": [{"op": "sum", "field": "Count", "as": "Total"}],
+      "frame": [null, null]
+    },
+    {"calculate": "datum.Count / datum.Total", "as": "Percent"}
+  ],
+  "layer": [
+    {
+      "mark": {"type": "arc", "innerRadius": 100, "stroke": "#fff"},
+      "encoding": {
+        "theta": {"field": "Count", "type": "quantitative"},
+        "color": {
+          "field": "Type",
+          "type": "nominal",
+          "title": "Aircraft Type",
+          "scale": {"scheme": "category10"},
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "titleAnchor": "middle",
+            "titleFontSize": 14,
+            "labelFontSize": 13,
+            "symbolSize": 200,
+            "symbolStrokeWidth": 2,
+            "labelOffset": 12,
+            "columnPadding": 20,
+            "rowPadding": 10,
+            "padding": 20
+          }
+        },
+        "tooltip": [
+          {"field": "Type", "title": "Aircraft Type"},
+          {"field": "Count", "title": "Count"},
+          {"field": "Percent", "title": "Share", "format": ".1%"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "radius": 140,
+        "align": "center",
+        "baseline": "middle",
+        "fontSize": 13,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "theta": {"field": "Count", "type": "quantitative"},
+        "text": {
+          "signal": "datum.Type + ' (' + format(datum.Percent, '.0%') + ')'"
+        },
+        "color": {"value": "black"}
+      }
+    }
+  ],
+  "config": {
+    "background": "#fafafa",
+    "legend": {"labelFontSize": 10, "titleFontSize": 10},
+    "view": {"stroke": "transparent"},
+    "padding": {"top": 20, "right": 20, "bottom": 50, "left": 20}
+  }
+}

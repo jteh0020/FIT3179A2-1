@@ -138,13 +138,58 @@ h1, h2 {
 }
 
 #stacked_bar_chart {
-  margin: auto;
-  width: 90%;
-  max-width: 900px;
+  width: min(96vw, 1100px);        /* increased width for a more impactful display */
+  min-height: 550px;               /* taller to fit long labels and larger bars */
+  margin: 40px auto;               /* more vertical spacing */
+  display: block;
+  border: 1px solid #ccc;
   border-radius: 12px;
-  background: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  background-color: #fff;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhance title and dropdown */
+#stacked_bar_chart h2 {
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  color: #003366;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 24px; /* increased title size */
+}
+
+#stacked-selector-container {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+}
+
+/* Dropdown styling consistency */
+.vega-bind select {
+  padding: 6px 10px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  background-color: #fff;
+  font-size: 15px;
+}
+
+/* Improve Vega text scaling */
+#stacked_bar_chart .vega-embed text {
+  font-family: "Inter", sans-serif !important;
+  font-size: 16px !important;
+}
+
+#stacked_bar_chart .role-axis-label {
+  font-size: 14px !important;
+}
+
+#stacked_bar_chart .role-title,
+#stacked_bar_chart .role-axis-title {
+  font-size: 18px !important;
+  font-weight: 700 !important;
 }
 
 #line_chart {
@@ -215,3 +260,121 @@ header h2 {
   margin: 0;           /* ✅ makes the title flush with header */
   padding: 0;
 }
+/* ==============================
+   AIRCRAFT MOVEMENT TREND CHART
+   ============================== */
+
+#aircraft_movement_chart {
+  width: min(96vw, 900px);      /* responsive width */
+  min-height: 400px;            /* taller for line chart clarity */
+  margin: 40px auto;            /* spacing from other elements */
+  display: block;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fafafa;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Title styling inside the aircraft movement section */
+#aircraft_movement_chart h2 {
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  color: #003366;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+/* Vega-Lite text and legend improvements */
+#aircraft_movement_chart .vega-embed text {
+  font-family: "Inter", sans-serif !important;
+  font-size: 16px !important;
+  fill: #222 !important;
+}
+
+#aircraft_movement_chart .role-axis-title {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+}
+
+#aircraft_movement_chart .role-axis-label {
+  font-size: 15px !important;
+}
+
+#aircraft_movement_chart .role-legend-title {
+  font-size: 17px !important;
+  font-weight: 600 !important;
+}
+
+#aircraft_movement_chart .role-legend-label {
+  font-size: 15px !important;
+}
+
+/* Hover animation to match the storytelling dashboard style */
+#aircraft_movement_chart:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease;
+}
+/* ===== Fleet Pie Chart Styling ===== */
+#fleet_pie_chart {
+  width: min(96vw, 550px);     /* responsive but slightly compact */
+  min-height: 500px;           /* make it balanced with donut size */
+  margin: 40px auto;           /* center and separate from other sections */
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Improve slider control look */
+#fleet_pie_chart .vega-bind-name {
+  font-weight: 600;
+  margin-right: 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  color: #005b96;
+}
+
+#fleet_pie_chart .vega-bind input[type="range"] {
+  width: 220px;
+  accent-color: #1b98e0;
+  height: 6px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+/* Tooltip, labels and legend readability */
+#fleet_pie_chart text {
+  font-family: "Inter", sans-serif !important;
+  font-size: 15px !important;
+}
+
+#fleet_pie_chart .role-legend-label {
+  font-size: 14px !important;
+}
+
+#fleet_pie_chart .role-legend-title {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+
+#fleet_pie_chart .vega-embed {
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Maintain dashboard consistency */
+#fleet_pie_chart h2 {
+  text-align: center;
+  color: #003366;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+

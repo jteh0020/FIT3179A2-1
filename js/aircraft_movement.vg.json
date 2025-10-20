@@ -6,12 +6,13 @@
     "fontWeight": "bold",
     "anchor": "middle"
   },
-  "width": 850,
-  "height": 450,
+  "width": 900,
+  "height": 480,
   "data": {
     "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/aircraft_movement.csv",
     "format": {"type": "csv"}
   },
+
   "transform": [
     {
       "fold": ["2017","2018","2019","2020","2021","2022","2023","2024"],
@@ -20,30 +21,78 @@
     {
       "calculate": "toNumber(replace(datum.Movements, ',', ''))",
       "as": "MovementsNum"
+    },
+    {
+      "filter": "AirportSelect == 'All' || datum.Airport == AirportSelect"
     }
   ],
+
+  "params": [
+    {
+      "name": "AirportSelect",
+      "value": "All",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All",
+          "ALOR SETAR",
+          "BINTULU",
+          "IPOH",
+          "JOHOR BHARU",
+          "KLIA",
+          "KLIA2",
+          "KOTA BHARU",
+          "KOTA KINABALU",
+          "KUALA TERENGGANU",
+          "KUANTAN",
+          "KUCHING",
+          "LABUAN",
+          "LAHAD DATU",
+          "LANGKAWI",
+          "LIMBANG",
+          "MELAKA",
+          "MIRI",
+          "MUKAH",
+          "MULU",
+          "PANGKOR",
+          "PULAU PINANG",
+          "REDANG",
+          "SANDAKAN",
+          "SIBU",
+          "SUBANG",
+          "TAWAU",
+          "TIOMAN"
+        ],
+        "name": "Select Airport: "
+      }
+    }
+  ],
+
   "mark": {
     "type": "line",
-    "point": {"filled": true, "size": 40},
-    "strokeWidth": 2
+    "point": {"filled": true, "size": 60, "color": "white"},
+    "strokeWidth": 2,
+    "opacity": 0.9
   },
+
   "encoding": {
     "x": {
       "field": "Year",
       "type": "ordinal",
       "title": "Year",
-      "axis": {"labelAngle": 0}
+      "axis": {"labelAngle": 0, "labelFontSize": 13, "titleFontSize": 15}
     },
     "y": {
       "field": "MovementsNum",
       "type": "quantitative",
-      "title": "Aircraft Movements"
+      "title": "Aircraft Movements",
+      "axis": {"labelFontSize": 13, "titleFontSize": 15, "grid": true}
     },
     "color": {
       "field": "Airport",
       "type": "nominal",
-      "title": "Airport",
-      "legend": {"orient": "right"}
+      "scale": {"scheme": "category20"},
+      "legend": {"title": "Airport", "columns": 2, "labelFontSize": 11, "titleFontSize": 13}
     },
     "tooltip": [
       {"field": "Airport", "title": "Airport"},
@@ -51,6 +100,7 @@
       {"field": "MovementsNum", "title": "Movements", "format": ","}
     ]
   },
+
   "config": {
     "background": "#fafafa",
     "axis": {"labelFontSize": 13, "titleFontSize": 15},

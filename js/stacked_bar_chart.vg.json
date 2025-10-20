@@ -2,11 +2,11 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Passenger Movement by Malaysian Airports (2017–2024)",
-    "fontSize": 16,
+    "fontSize": 25,
     "fontWeight": "bold",
     "anchor": "middle"
   },
-  "width": 1100,
+  "width": 1400,
   "height": 440,
   "padding": {"top": 10, "left": 80, "right": 40, "bottom": 120},
   "data": {
@@ -59,8 +59,8 @@
       "title": "Airport",
       "axis": {
         "labelAngle": -40,
-        "labelFontSize": 12,
-        "titleFontSize": 13,
+        "labelFontSize": 18,
+        "titleFontSize": 20,
         "labelPadding": 10,
         "titlePadding": 25
       }
@@ -70,8 +70,8 @@
       "type": "quantitative",
       "title": "Passengers per Year",
       "axis": {
-        "labelFontSize": 12,
-        "titleFontSize": 13,
+        "labelFontSize": 18,
+        "titleFontSize": 20,
         "labelPadding": 6,
         "titlePadding": 28
       }

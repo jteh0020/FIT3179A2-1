@@ -128,7 +128,7 @@
           { "field": "Country1", "title": "Country (From)" },
           { "field": "City2", "title": "To" },
           { "field": "Country2", "title": "Country (To)" },
-          { "field": "Passenger_Trips", "title": "Passenger Trips Per Month" },
+          { "field": "Passenger_Trips", "title": "Passenger Trips Daily" },
           { "field": "Year", "title": "Year" }
         ]
       }
