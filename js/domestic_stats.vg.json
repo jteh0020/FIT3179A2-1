@@ -108,8 +108,7 @@
         "x": {
           "aggregate": "median",
           "field": "Total_Trips",
-          "type": "quantitative",
-          "title": "Median Passenger Trips"
+          "type": "quantitative"
         }
       }
     },
@@ -127,8 +126,8 @@
         "text": {
           "aggregate": "median",
           "field": "Total_Trips",
-          "format": ",",
-          "title": "Median Passenger Trips"
+          "format": ","
+
         }
       }
     }

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Air Travel in Malaysia – Storytelling Dashboard</title>
 
-  <!-- Vega & Vega-Lite libraries -->
+  <!-- Vega Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
@@ -53,15 +53,18 @@
       font-size: 20px;
     }
     nav a:hover { text-decoration: underline; }
+
     main {
       max-width: 1100px;
       margin: 2rem auto;
       padding: 0 1.5rem;
     }
+
     h1, h2, h3 {
       color: var(--primary);
       text-align: center;
     }
+
     section.card {
       background: #fff;
       border-radius: 14px;
@@ -74,6 +77,7 @@
       transform: translateY(-2px);
       box-shadow: 0 5px 12px rgba(0,0,0,0.12);
     }
+
     footer {
       text-align: center;
       padding: 2.5rem 1rem;
@@ -86,102 +90,199 @@
 <body>
   <header>
     <div class="header-inner">
-      <h2>✈️ Air Travel in Malaysia</h2>
+      <h2>Air Travel in Malaysia</h2>
       <nav>
-        <a href="#network">Network</a>
-        <a href="#airports">Airports</a>
-        <a href="#fleet">Fleet</a>
+        <a href="#network">Network Connectivity</a>
+        <a href="#airports">Airports Operations</a>
+        <a href="#fleet">Fleet Analysis</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- Introduction -->
+    <!-- Intro -->
     <section class="card" id="intro">
       <h1>Exploring Malaysia’s Air Travel Landscape</h1>
       <p>
-        This storytelling dashboard explores Malaysia’s <strong>aviation ecosystem</strong> across three core dimensions —
-        <em>Network Connectivity</em>, <em>Airport Operations</em>, and <em>Fleet Composition</em>.
-        Together, they reveal how Malaysia connects regions, powers its airports, and evolves its fleet post-pandemic.
+        This data visualisation explores three key aspects of <strong>Malaysia's air travel industry</strong> from 
+        <strong>2017 to 2025</strong>: <strong>Network Connectivity</strong>, <strong>Airport Operations</strong>, 
+        and <strong>Fleet Composition</strong>. Each section provides insights into how Malaysia's 
+        <strong>aviation sector has evolved over time</strong>, especially in response to major global events 
+        such as the <strong>COVID-19 pandemic</strong>.
       </p>
     </section>
 
-    <!-- 1️⃣ NETWORK OVERVIEW -->
+    <!-- 1️⃣ Network -->
     <section class="card" id="network">
       <h2>1. Air Network Connectivity</h2>
-      <p>
-        Malaysia’s aviation network bridges regions and nations, forming the backbone of both domestic and international connectivity.
-        This section visualizes the country’s air routes and busiest corridors, showing how hubs like Kuala Lumpur, Penang, and Kota Kinabalu anchor national and regional mobility.
-      </p>
+      <p>This segment will analyse network connectivity of both domestic sectors and international sectors of Malaysia's Air Travel insights</p>
 
       <h3>1.1 Domestic Network</h3>
       <div id="dot_map"></div>
-      <p>The map below displays Malaysia’s <strong>domestic routes</strong>, while the bar chart ranks the <strong>top 10 busiest domestic routes</strong> by passenger or flight volume.</p>
+
+      <p>
+        This visualisation illustrates a <strong>hybrid air transport network</strong> across Malaysia that combines both 
+        <strong>point-to-point</strong> and <strong>hub-and-spoke</strong> characteristics. Major urban centres such as 
+        <strong>Kuala Lumpur</strong>, <strong>Penang</strong>, and <strong>Johor Bahru</strong> operate primarily on a 
+        point-to-point model, where flights connect directly between large cities to accommodate 
+        <strong>high passenger demand</strong> and <strong>frequent operations</strong>.
+      </p>
+
+      <p>
+        In contrast, rural and remote areas in East Malaysia — including <em>Mukah</em>, <em>Bario</em>, and <em>Long Banga</em> — 
+        follow a hub-and-spoke structure, relying on regional hubs such as <strong>Kuching</strong>, <strong>Miri</strong>, 
+        and <strong>Kota Kinabalu</strong> to connect with the rest of the country. The lower population density and 
+        limited demand in these regions make direct routes less viable, leading airlines to 
+        <strong>consolidate traffic through key hubs</strong> for greater efficiency.
+      </p>
+
+      <p>
+        Overall, this mixed structure demonstrates how Malaysia’s aviation network 
+        <strong>balances connectivity and demand</strong> — offering dense intercity routes for economic centres 
+        while ensuring accessibility for rural communities.
+      </p>
+
       <div id="bar_vis"></div>
+
+      <p>
+        The chart below highlights Malaysia’s <strong>busiest domestic flight routes (2017–2024)</strong>, 
+        with <strong>Kuala Lumpur–Kota Kinabalu</strong> and <strong>Kuala Lumpur–Kuching</strong> ranking highest 
+        as they provide the <strong>fastest and most efficient connections between West and East Malaysia</strong>. 
+      </p>
+
+      <p>
+        The <strong>third and fourth busiest routes</strong>, <strong>Kuala Lumpur–Langkawi</strong> and 
+        <strong>Kuala Lumpur–Penang</strong>, link major <strong>tourism and business hubs</strong> in West Malaysia, 
+        reflecting strong travel demand and network growth. These routes also serve as 
+        <strong>feeder flights</strong>, enabling passengers from regional cities such as 
+        <em>Penang</em>, <em>Johor Bahru</em>, and <em>Kota Bharu</em> to connect through 
+        <strong>Kuala Lumpur International Airport (KLIA)</strong> for international travel — 
+        reinforcing Kuala Lumpur’s role as <strong>Malaysia’s primary aviation gateway</strong>.
+      </p>
 
       <h3>1.2 International Network</h3>
       <div id="dot_map1"></div>
       <p>
-        Malaysia’s international routes connect its major airports to key global destinations.
-        The following visualizations highlight <strong>top international routes</strong> and Malaysia’s aviation role in Southeast Asia.
+        International air connectivity in Malaysia is largely concentrated in <strong>West Malaysia</strong>, particularly through 
+        <strong>Kuala Lumpur International Airport (KLIA)</strong>, which serves as the main global hub linking the country to 
+        <em>Asia, the Middle East, Europe, and Oceania</em>. In contrast, <strong>secondary airports such as Penang and Kota Kinabalu</strong> 
+        handle smaller volumes of international traffic, mainly catering to <em>leisure and regional tourism markets</em>. 
+        This pattern reflects the centralization of Malaysia’s global air network around Kuala Lumpur, while secondary cities play 
+        supporting roles in expanding tourism access and regional connectivity.
       </p>
+
       <div id="bar_vis1"></div>
+      <p>
+        The <strong>Kuala Lumpur–Singapore</strong> route dominates as the <em>busiest international connection</em> from Malaysia, 
+        recording exceptionally high passenger volumes due to strong <em>business, tourism, and commuter traffic</em> between the two cities. 
+        This is followed by <strong>Kuala Lumpur–Jakarta</strong> and <strong>Kuala Lumpur–Bangkok</strong>, reflecting Malaysia’s 
+        close economic and cultural ties with its ASEAN neighbors. Routes to <strong>Ho Chi Minh City</strong> and <strong>Penang–Singapore</strong> 
+        further highlight the importance of <em>regional air mobility</em> within Southeast Asia. Overall, these high-demand corridors demonstrate 
+        Malaysia’s strategic role in connecting major <em>business and tourism hubs</em> across the region, with <strong>Kuala Lumpur International Airport (KLIA)</strong> 
+        serving as the central gateway for outbound and connecting international passengers.
+      </p>
     </section>
 
-    <!-- 2️⃣ AIRPORT OPERATIONS -->
+    <!-- 2️⃣ Airport -->
     <section class="card" id="airports">
       <h2>2. Airport Operations & Performance</h2>
-      <p>
-        Airports are the heartbeat of Malaysia’s air system.
-        This section explores <strong>passenger movements</strong> and <strong>aircraft activity</strong> between 2017 and 2024, revealing operational performance and recovery trends.
-      </p>
+      <p>This segment analyses the performance of Malaysian airports from 2017 to 2024, focusing on passenger movement, aircraft activity, and the role of major hubs such as KLIA, Kota Kinabalu, and Penang in supporting national and international connectivity.</p>
 
       <h3>2.1 Passenger Movements</h3>
       <div id="stacked_bar_chart"></div>
+      <p>
+        <strong>Kuala Lumpur International Airport (KLIA)</strong> records the highest passenger movement in Malaysia, 
+        exceeding <em>30 million passengers per year</em>, reaffirming its role as the nation’s main aviation hub for both 
+        domestic and international travel. <strong>Kota Kinabalu</strong> and <strong>Penang</strong> follow as key regional gateways, 
+        handling substantial traffic from tourism and intercity connections. In contrast, airports in smaller cities such as 
+        <strong>Miri, Sibu, and Tawau</strong> record significantly lower passenger volumes, reflecting their focus on regional 
+        and essential connectivity rather than high-capacity commercial travel. This pattern highlights Malaysia’s 
+        <em>concentration of air traffic in major urban centers</em> while smaller airports sustain local accessibility across 
+        the country’s geographically dispersed regions.
+      </p>
 
       <h3>2.2 Aircraft Movements</h3>
-      <p>The chart below illustrates annual <strong>takeoffs and landings</strong> across major airports, capturing the pandemic’s impact and subsequent recovery.</p>
       <div id="aircraft_movement_chart"></div>
+      <p>
+        The trend in <strong>aircraft movements across major Malaysian airports (2017–2024)</strong> shows a significant drop in 2020–2021, 
+        reflecting the impact of <em>COVID-19 travel restrictions</em> on the aviation industry. <strong>Kuala Lumpur International Airport (KLIA)</strong> 
+        consistently records the highest movement volumes, followed by <strong>Kota Kinabalu</strong> and <strong>Penang</strong>, highlighting their roles 
+        as key national and regional hubs. From 2022 onwards, flight operations show a strong recovery, especially at major airports, 
+        driven by the gradual reopening of international borders and increased domestic travel demand. This trend indicates a 
+        <em>resilient post-pandemic recovery</em> in Malaysia’s aviation sector, with major hubs regaining traffic faster than smaller regional airports.
+      </p>
     </section>
 
-    <!-- 3️⃣ FLEET INSIGHT -->
+    <!-- 3️⃣ Fleet -->
     <section class="card" id="fleet">
       <h2>3. Fleet Composition & Evolution</h2>
-      <p>
-        Malaysia’s airline fleets reflect industry growth, strategy, and market demand.
-        These visuals highlight fleet size trends and composition across different aircraft types from 2017–2025.
-      </p>
+      <p>Malaysia’s airline fleets reflect strategy and demand adaptation. Below visualisations highlight total fleet size and composition trends (2017–2025).</p>
 
       <h3>3.1 Fleet Growth Over Time</h3>
       <div id="line_chart"></div>
-
-      <h3>3.2 Fleet Composition by Type</h3>
       <p>
-        The pie chart below shows Malaysia’s <strong>fleet composition</strong> by aircraft type.
-        Use the slider to explore changes between 2017 and 2025.
+        <strong>AirAsia</strong> consistently maintains the largest fleet throughout 2017–2025, reflecting its dominance in Malaysia’s low-cost airline market. 
+        <strong>Malaysia Airlines</strong> and <strong>Batik Air Malaysia</strong> show steady recovery and growth after the 2021 downturn, 
+        while smaller regional carriers such as <strong>Firefly</strong> and <strong>Maswings</strong> remain stable with limited fleet sizes. 
+        This trend suggests strong resilience among major carriers and sustained operational balance across regional airlines.
       </p>
-      <div id="fleet_pie_chart"></div>
+
+    <h3>3.2 Fleet Composition by Type</h3>
+    <div class="fleet-layout">
+      <div id="fleet_pie_chart" class="fleet-chart"></div>
+      <div class="fleet-text">
+        <p>
+          The fleet composition of <strong>Malaysian airlines (2017–2025)</strong> is dominated by 
+          <strong>narrow-body aircraft</strong>, which make up nearly <em>70% of the total fleet</em>. 
+          This reflects the strong focus on <em>short- to medium-haul routes</em> across domestic and 
+          regional markets.
+        </p>
+        <p>
+          <strong>Wide-body aircraft</strong> and <strong>regional jets</strong> form smaller shares, 
+          supporting <em>long-haul international services</em> and <em>low-demand regional connections</em> 
+          respectively, highlighting a <strong>network structure centered on efficiency and route specialization</strong>.
+        </p>
+      </div>
+    </div>
     </section>
 
-    <footer>
+    <footer style="text-align: left; max-width: 1200px; margin: 0 auto; line-height: 1.8; font-size: 18px;">
+      <p><strong>Author:</strong> Teh Joo Hong (33524483)<br>
+      <strong>Unit:</strong> FIT3179 – Data Visualisation<br>
+      <strong>Date:</strong> 19 October 2025</p>
+
+      <p><strong>Data Sources & Acknowledgements:</strong><br>
+      1. <a href="https://www.kaggle.com/datasets/mahoora00135/flights" target="_blank">General Flights – Kaggle</a><br>
+      2. <a href="https://www.kaggle.com/datasets/sanjeetsinghnaik/world-airport-dataset" target="_blank">World Airport Dataset – Kaggle</a><br>
+      3. <a href="https://www.kaggle.com/datasets/zuoranlee/world-flight-dataset-2022-2025/settings" target="_blank">World Flight Dataset – Kaggle</a><br>
+      4. <a href="https://www.planespotters.net/" target="_blank">Airline Fleet Data – Planespotters.net</a><br>
+      5. <a href="https://www.mot.gov.my/en/aviation/reports/quarterly-statistics-of-transport" target="_blank">Malaysian Airport Statistics – Ministry of Transport Malaysia</a><br>
+      6. <a href="https://www.kaggle.com/datasets/zuoranlee/malaysianflights" target="_blank">Malaysian Flight Statistics – Kaggle</a></p>
+
       <p>
-        Data sources: <em>Kaggle, Ministry of Transport Malaysia, Planespotters.net</em><br>
-        Visualisations built with <a href="https://vega.github.io/" target="_blank">Vega-Lite</a> |
-        Dashboard designed by <strong>Jteh0020</strong>
+      This visualisation was created as part of the <strong>FIT3179 (Data Visualisation)</strong> unit at 
+      <strong>Monash University Malaysia</strong>. All datasets are publicly available open data and 
+      are used solely for <em>educational and non-commercial purposes</em>.
       </p>
     </footer>
   </main>
 
   <!-- Vega Embeds -->
   <script>
-    vegaEmbed('#dot_map', 'js/domestic_routes.vg.json', { actions: false, renderer: "svg" });
-    vegaEmbed('#bar_vis', 'js/domestic_stats.vg.json', { actions: false, renderer: "svg" });
-    vegaEmbed('#dot_map1', 'js/international_routes.vg.json', { actions: false, renderer: "svg" });
-    vegaEmbed('#bar_vis1', 'js/international_stats.vg.json', { actions: false, renderer: "svg" });
-    vegaEmbed('#stacked_bar_chart', 'js/stacked_bar_chart.vg.json', { actions: false, renderer: "svg" });
-    vegaEmbed('#aircraft_movement_chart', 'js/aircraft_movement.vg.json', { actions: false, renderer: "svg" });
-    vegaEmbed('#line_chart', 'js/fleet_size.vg.json', { actions: false, renderer: "svg" });
-    vegaEmbed('#fleet_pie_chart', 'js/fleet_pie.vg.json', { actions: false, renderer: "svg" });
+    const charts = [
+      { id: '#dot_map', file: 'js/domestic_routes.vg.json' },
+      { id: '#bar_vis', file: 'js/domestic_stats.vg.json' },
+      { id: '#dot_map1', file: 'js/international_routes.vg.json' },
+      { id: '#bar_vis1', file: 'js/international_stats.vg.json' },
+      { id: '#stacked_bar_chart', file: 'js/stacked_bar_chart.vg.json' },
+      { id: '#aircraft_movement_chart', file: 'js/aircraft_movement.vg.json' },
+      { id: '#line_chart', file: 'js/fleet_size.vg.json' },
+      { id: '#fleet_pie_chart', file: 'js/fleet_pie.vg.json' }
+    ];
+
+    charts.forEach(c => {
+      vegaEmbed(c.id, c.file, { actions: false, renderer: "svg" });
+    });
   </script>
 </body>
 </html>

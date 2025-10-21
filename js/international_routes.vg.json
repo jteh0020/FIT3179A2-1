@@ -79,6 +79,16 @@
       }
     }
   ],
+  "data": {
+    "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
+    "format": { "type": "csv" }
+  },
+  "transform": [
+    { "filter": "datum.Year == year_select" },
+    {
+      "filter": "(country_select == 'All') || (datum.Country1 == country_select) || (datum.Country2 == country_select)"
+    }
+  ],
   "layer": [
     {
       "data": { "graticule": { "step": [20, 20] } },
@@ -102,16 +112,6 @@
       }
     },
     {
-      "data": {
-        "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
-        "format": { "type": "csv" }
-      },
-      "transform": [
-        { "filter": "datum.Year == year_select" },
-        {
-          "filter": "(country_select == 'All') || (datum.Country1 == country_select) || (datum.Country2 == country_select)"
-        }
-      ],
       "mark": {
         "type": "rule",
         "stroke": "steelblue",
@@ -134,15 +134,7 @@
       }
     },
     {
-      "data": {
-        "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
-        "format": { "type": "csv" }
-      },
       "transform": [
-        { "filter": "datum.Year == year_select" },
-        {
-          "filter": "(country_select == 'All') || (datum.Country1 == country_select) || (datum.Country2 == country_select)"
-        },
         {
           "filter": "indexof(['Kuala Lumpur','Penang','Kota Kinabalu','Langkawi','Kuching','Subang','Johor Bahru'], datum.City1) >= 0"
         }
@@ -155,15 +147,7 @@
       }
     },
     {
-      "data": {
-        "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
-        "format": { "type": "csv" }
-      },
       "transform": [
-        { "filter": "datum.Year == year_select" },
-        {
-          "filter": "(country_select == 'All') || (datum.Country1 == country_select) || (datum.Country2 == country_select)"
-        },
         {
           "filter": "indexof(['Kuala Lumpur','Penang','Kota Kinabalu','Langkawi','Kuching','Subang','Johor Bahru'], datum.City2) < 0"
         }
@@ -235,3 +219,4 @@
     }
   ]
 }
+
