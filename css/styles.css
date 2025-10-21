@@ -401,3 +401,118 @@ header h2 {
   line-height: 1.8;
 }
 
+/* ===== Overview Stats Section ===== */
+.stats-summary {
+  text-align: center;
+  background: linear-gradient(90deg, #f8fbff, #e6f0ff);
+  border-left: 6px solid var(--primary);
+  padding: 2.5rem 1rem;
+}
+
+.stats-summary h2 {
+  color: var(--primary);
+  margin-bottom: 2rem;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.stat-box {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  padding: 1.5rem 2rem;
+  width: 200px;
+  transition: all 0.3s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+}
+
+.stat-box h3 {
+  font-size: 38px;
+  color: var(--primary);
+  margin: 0;
+  font-weight: 800;
+}
+
+.stat-box p {
+  margin-top: 0.5rem;
+  font-size: 18px;
+  color: #555;
+}
+
+/* ===== Overview Section ===== */
+.overview-section {
+  color: white;
+  text-align: center;
+  padding: 3rem 1rem 4rem;
+  border-radius: 0 0 20px 20px;
+}
+
+.overview-section h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.overview-section p {
+  font-size: 18px;
+  opacity: 0.9;
+  margin-bottom: 2.5rem;
+}
+
+
+.overview-grid {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: nowrap;       /* keep all in one line */
+  gap: 1.5rem;
+  overflow-x: auto;        /* allow horizontal scroll if screen too small */
+  padding: 0 1rem;
+}
+
+.overview-card {
+  background: #fff;
+  color: #222;
+  width: 230px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 1.5rem 1rem;
+  transition: all 0.3s ease;
+  border-top: 6px solid transparent;
+}
+
+.overview-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+
+
+.overview-card p {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #555;
+}
+
+.overview-card span {
+  font-size: 18px;
+  margin-right: 6px;
+}
+
+/* Accent colors */
+.overview-card.blue { border-color: #1b98e0; }
+.overview-card.green { border-color: #28a745; }
+.overview-card.orange { border-color: #ffb703; }
+.overview-card.purple { border-color: #9b5de5; }
