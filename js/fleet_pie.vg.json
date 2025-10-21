@@ -7,8 +7,7 @@
     "anchor": "middle"
   },
   "width": 450,
-  "height": 450,
-  "autosize": {"type": "fit", "contains": "padding"},
+  "height": 350,
   "data": {
     "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/aircraft_type.csv",
     "format": {"type": "csv"}

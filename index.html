@@ -58,7 +58,7 @@
       margin: 2rem auto;
       padding: 0 1.5rem;
     }
-    h1, h2 {
+    h1, h2, h3 {
       color: var(--primary);
       text-align: center;
     }
@@ -68,6 +68,11 @@
       box-shadow: 0 3px 8px rgba(0,0,0,0.08);
       padding: 2.2rem;
       margin-bottom: 2rem;
+      transition: all 0.3s ease;
+    }
+    section.card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 12px rgba(0,0,0,0.12);
     }
     footer {
       text-align: center;
@@ -83,8 +88,7 @@
     <div class="header-inner">
       <h2>✈️ Air Travel in Malaysia</h2>
       <nav>
-        <a href="#domestic">Domestic</a>
-        <a href="#international">International</a>
+        <a href="#network">Network</a>
         <a href="#airports">Airports</a>
         <a href="#fleet">Fleet</a>
       </nav>
@@ -96,115 +100,68 @@
     <section class="card" id="intro">
       <h1>Exploring Malaysia’s Air Travel Landscape</h1>
       <p>
-        This interactive dashboard explores Malaysia’s <strong>aviation ecosystem</strong> — 
-        from domestic routes that connect regions across the peninsula and Borneo, 
-        to international networks linking Malaysia with the world. 
-        The story concludes with a look at airport performance and airline fleet evolution, 
-        uncovering how the industry has adapted and recovered from the pandemic years.
+        This storytelling dashboard explores Malaysia’s <strong>aviation ecosystem</strong> across three core dimensions —
+        <em>Network Connectivity</em>, <em>Airport Operations</em>, and <em>Fleet Composition</em>.
+        Together, they reveal how Malaysia connects regions, powers its airports, and evolves its fleet post-pandemic.
       </p>
     </section>
 
-    <!-- 1. Domestic Insight -->
-    <section class="card" id="domestic">
-      <h2>1. Domestic Flight Insight</h2>
+    <!-- 1️⃣ NETWORK OVERVIEW -->
+    <section class="card" id="network">
+      <h2>1. Air Network Connectivity</h2>
       <p>
-        Malaysia’s domestic network forms the backbone of national mobility. 
-        The visualizations below show how airports such as 
-        <em>Kuala Lumpur (KUL)</em>, <em>Kota Kinabalu (BKI)</em>, 
-        and <em>Penang (PEN)</em> anchor the country’s air routes.
+        Malaysia’s aviation network bridges regions and nations, forming the backbone of both domestic and international connectivity.
+        This section visualizes the country’s air routes and busiest corridors, showing how hubs like Kuala Lumpur, Penang, and Kota Kinabalu anchor national and regional mobility.
       </p>
+
+      <h3>1.1 Domestic Network</h3>
       <div id="dot_map"></div>
-      <p>
-        The map above highlights all <strong>domestic routes</strong>, 
-        while the bar chart below ranks the <strong>top 10 busiest routes</strong> 
-        based on passenger or flight volume.
-      </p>
+      <p>The map below displays Malaysia’s <strong>domestic routes</strong>, while the bar chart ranks the <strong>top 10 busiest domestic routes</strong> by passenger or flight volume.</p>
       <div id="bar_vis"></div>
-    </section>
 
-    <!-- 2. International Insight -->
-    <section class="card" id="international">
-      <h2>2. International Flight Insight</h2>
-      <p>
-        Malaysia serves as a <strong>key aviation hub in Southeast Asia</strong>. 
-        The international route map visualizes flight paths that connect 
-        Kuala Lumpur and other airports to major cities around the world.
-      </p>
+      <h3>1.2 International Network</h3>
       <div id="dot_map1"></div>
       <p>
-        Below, the bar chart identifies the <strong>top 10 international routes</strong>, 
-        revealing Malaysia’s strongest air links to destinations such as 
-        <em>Singapore</em>, <em>Bangkok</em>, <em>Jakarta</em>, and <em>Ho Chi Minh</em>.
+        Malaysia’s international routes connect its major airports to key global destinations.
+        The following visualizations highlight <strong>top international routes</strong> and Malaysia’s aviation role in Southeast Asia.
       </p>
       <div id="bar_vis1"></div>
     </section>
 
-    <!-- 3. Airport Performance -->
+    <!-- 2️⃣ AIRPORT OPERATIONS -->
     <section class="card" id="airports">
-      <h2>3.1 Malaysian Airport Performance</h2>
+      <h2>2. Airport Operations & Performance</h2>
       <p>
-        Airports are the pulse of Malaysia’s air connectivity. 
-        This visualization compares <strong>passenger movement</strong> 
-        across major airports from 2017 to 2024, 
-        showing how each facility contributes to the national aviation network.
+        Airports are the heartbeat of Malaysia’s air system.
+        This section explores <strong>passenger movements</strong> and <strong>aircraft activity</strong> between 2017 and 2024, revealing operational performance and recovery trends.
       </p>
+
+      <h3>2.1 Passenger Movements</h3>
       <div id="stacked_bar_chart"></div>
-      <p>
-        <strong>Kuala Lumpur International Airport (KUL)</strong> remains dominant, 
-        followed by <em>Kota Kinabalu</em>, <em>Penang</em>, and <em>Kuching</em>. 
-        Smaller regional airports support crucial domestic links, 
-        ensuring balanced connectivity throughout the country.
-      </p>
-    <!-- 3.5 Aircraft Movement Trends -->
-    <section class="card" id="movement">
-      <h2>3.2 Aircraft Movement Trends (2017–2024)</h2>
-      <p>
-        Aircraft movement data provides another lens into airport performance — reflecting both 
-        <strong>flight frequency</strong> and operational activity levels across Malaysia’s airports. 
-        This visualization highlights how <em>KLIA</em>, <em>KLIA2</em>, and <em>Penang</em> 
-        consistently led in movement volume, with evident dips during the pandemic and recovery in later years.
-      </p>
+
+      <h3>2.2 Aircraft Movements</h3>
+      <p>The chart below illustrates annual <strong>takeoffs and landings</strong> across major airports, capturing the pandemic’s impact and subsequent recovery.</p>
       <div id="aircraft_movement_chart"></div>
-      <p>
-        The chart captures annual <strong>takeoffs and landings</strong> for each airport, 
-        illustrating resilience and recovery trends across Malaysia’s aviation network.
-      </p>
-    </section>
     </section>
 
-    <!-- 4. Fleet Performance -->
+    <!-- 3️⃣ FLEET INSIGHT -->
     <section class="card" id="fleet">
-      <h2>4. Fleet Performance and Utilisation</h2>
+      <h2>3. Fleet Composition & Evolution</h2>
       <p>
-        The final section focuses on Malaysia’s <strong>airline fleet size</strong>, 
-        providing insight into capacity growth and industry recovery between 2017–2024. 
-        It reflects how carriers like <em>AirAsia</em>, <em>Malaysia Airlines</em>, 
-        and <em>Batik Air</em> adjusted operations to meet changing demand.
+        Malaysia’s airline fleets reflect industry growth, strategy, and market demand.
+        These visuals highlight fleet size trends and composition across different aircraft types from 2017–2025.
       </p>
+
+      <h3>3.1 Fleet Growth Over Time</h3>
       <div id="line_chart"></div>
+
+      <h3>3.2 Fleet Composition by Type</h3>
       <p>
-        Airlines demonstrate steady recovery post-2021, 
-        with low-cost carriers expanding rapidly to meet renewed passenger demand.
-      </p>
-    </section>
-    <!-- 4.1 Fleet Composition by Aircraft Type -->
-    <section class="card" id="fleet_composition">
-      <h2>4.1 Fleet Composition by Aircraft Type</h2>
-      <p>
-        This interactive pie chart shows Malaysia’s <strong>fleet composition</strong> 
-        by aircraft type across the years 2017–2025. Use the slider to explore 
-        how <em>Narrow Body</em>, <em>Wide Body</em>, and <em>Regional Jet</em> 
-        proportions evolved as airlines adapted their operations post-pandemic.
+        The pie chart below shows Malaysia’s <strong>fleet composition</strong> by aircraft type.
+        Use the slider to explore changes between 2017 and 2025.
       </p>
       <div id="fleet_pie_chart"></div>
-      <p>
-        In recent years, <strong>Narrow Body</strong> aircraft dominate the Malaysian fleet, 
-        reflecting growing demand for <em>short-to-medium haul</em> regional routes, 
-        while <em>Wide Body</em> and <em>Regional Jet</em> numbers fluctuate in line 
-        with international and domestic service recovery.
-      </p>
     </section>
-
 
     <footer>
       <p>
