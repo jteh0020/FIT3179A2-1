@@ -7,10 +7,7 @@
     "url": "https://raw.githubusercontent.com/jteh0020/FIT3179A2-1/main/data/intl_sheet2.csv",
     "format": {
       "type": "csv",
-      "parse": {
-        "Passenger_Trips": "number",
-        "Year": "number"
-      }
+      "parse": { "Passenger_Trips": "number", "Year": "number" }
     }
   },
 
@@ -33,14 +30,9 @@
     {
       "filter": "indexof(['Kuala Lumpur','Penang','Kota Kinabalu','Langkawi','Kuching','Subang','Johor Bahru'], datum.City1) >= 0"
     },
+    { "calculate": "datum.City1 + ' → ' + datum.City2", "as": "Route" },
     {
-      "calculate": "datum.City1 + ' → ' + datum.City2",
-      "as": "Route"
-    },
-    {
-      "aggregate": [
-        { "op": "sum", "field": "Passenger_Trips", "as": "Total_Trips" }
-      ],
+      "aggregate": [{ "op": "sum", "field": "Passenger_Trips", "as": "Total_Trips" }],
       "groupby": ["Route"]
     },
     {
@@ -54,85 +46,45 @@
     {
       "mark": { "type": "bar", "cornerRadiusEnd": 3 },
       "encoding": {
-        "y": {
-          "field": "Route",
-          "type": "nominal",
-          "sort": "-x",
-          "title": "Route"
-        },
-        "x": {
-          "field": "Total_Trips",
-          "type": "quantitative",
-          "title": "Passenger Trips Per Month"
-        },
-        "color": {
-          "condition": {
-            "test": "datum.rank == 1",
-            "value": "#1F77B4"
-          },
-          "value": "#1F77B4"
-        },
-        "opacity": {
-          "condition": {
-            "test": "datum.rank <= 3",
-            "value": 1
-          },
-          "value": 0.4
-        }
+        "y": { "field": "Route", "type": "nominal", "sort": "-x", "title": "Route" },
+        "x": { "field": "Total_Trips", "type": "quantitative", "title": "Passenger Trips Per Month" },
+        "color": { "value": "#1F77B4" },
+        "opacity": { "condition": { "test": "datum.rank <= 3", "value": 1 }, "value": 0.5 }
       }
     },
     {
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "baseline": "middle",
-        "dx": 5,
-        "fontSize": 12,
-        "color": "black"
-      },
+      "mark": { "type": "text", "align": "left", "baseline": "middle", "dx": 5, "fontSize": 12, "color": "black" },
       "encoding": {
         "y": { "field": "Route", "type": "nominal", "sort": "-x" },
         "x": { "field": "Total_Trips", "type": "quantitative" },
-        "text": {
-          "field": "Total_Trips",
-          "type": "quantitative",
-          "format": ","
-        }
+        "text": { "field": "Total_Trips", "type": "quantitative", "format": "," }
       }
     },
     {
-      "mark": {
-        "type": "rule",
-        "color": "red",
-        "strokeDash": [5, 5],
-        "size": 2
-      },
-      "encoding": {
-        "x": {
-          "aggregate": "median",
-          "field": "Total_Trips",
-          "type": "quantitative"
-        }
-      }
+      "mark": { "type": "rule", "color": "red", "strokeDash": [5, 5], "size": 2 },
+      "encoding": { "x": { "aggregate": "median", "field": "Total_Trips" } }
     },
     {
       "mark": {
         "type": "text",
         "color": "red",
-        "dx": 5,
-        "dy": -10,
-        "fontSize": 12,
-        "fontStyle": "italic"
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "fontStyle": "italic",
+        "align": "center",
+        "baseline": "middle",
+        "dy": 0
       },
       "encoding": {
         "x": { "aggregate": "median", "field": "Total_Trips" },
-        "text": {
-          "aggregate": "median",
-          "field": "Total_Trips",
-          "format": ",",
-          "title": "Median Passenger Trips"
-        }
+        "y": { "value": 0 },
+        "text": { "aggregate": "median", "field": "Total_Trips", "format": "," }
       }
     }
-  ]
+  ],
+
+  "config": {
+    "title": { "fontSize": 18, "fontWeight": "bold", "anchor": "start" },
+    "axis": { "labelFontSize": 12, "titleFontSize": 13 }
+  }
 }

@@ -19,36 +19,22 @@
       "value": "2024",
       "bind": {
         "input": "select",
-        "options": [
-          "2017",
-          "2018",
-          "2019",
-          "2020",
-          "2021",
-          "2022",
-          "2023",
-          "2024"
-        ],
+        "options": ["2017","2018","2019","2020","2021","2022","2023","2024"],
         "name": "Select Year: "
       }
     }
   ],
   "transform": [
     {
-      "fold": [
-        "2017",
-        "2018",
-        "2019",
-        "2020",
-        "2021",
-        "2022",
-        "2023",
-        "2024"
-      ],
+      "fold": ["2017","2018","2019","2020","2021","2022","2023","2024"],
       "as": ["Year", "Passengers"]
     },
     {"calculate": "toNumber(datum.Passengers)", "as": "PassengersNum"},
-    {"filter": "datum.Year == year_selection"}
+    {"filter": "datum.Year == year_selection"},
+    {
+      "window": [{"op": "rank", "as": "rank"}],
+      "sort": [{"field": "PassengersNum", "order": "descending"}]
+    }
   ],
   "mark": {"type": "bar", "cornerRadiusEnd": 3},
   "encoding": {
@@ -77,10 +63,10 @@
       }
     },
     "color": {
-      "field": "Airport",
-      "type": "nominal",
-      "legend": null,
-      "scale": {"scheme": "tableau10"}
+      "condition": [
+        {"test": "datum.rank <= 3", "value": "#004C91"}  
+      ],
+      "value": "#1F77B4"  
     },
     "tooltip": [
       {"field": "Airport", "title": "Airport"},
